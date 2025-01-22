@@ -1,0 +1,13 @@
+{
+    "require": {
+        "twig/twig": "v3.14.2",
+        "symfony/webpack-encore-bundle": "^2.2",
+        "symfony/asset": "^7.1",
+        "symfony/twig-bundle": "^7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
