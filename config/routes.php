@@ -1,5 +1,5 @@
 <?php
-//use App\Controller;
+use App\Controller;
 
 // Récupérer les paramètres de l'URL
 $page = $_GET['page'] ?? null; // Page active
