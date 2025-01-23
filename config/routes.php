@@ -9,13 +9,44 @@ $controller = 'Controller';
 $method = 'Connexion';
 
 switch ($page) {
+    case 'Accueil':
+        $controller = 'Controller';
+        $method = 'accueil';
+        break;
+    case 'AjoutAvis':
+        $controller = 'Controller';
+        $method = 'AjoutAvis';
+        break;
+    case 'Avis':    
+        $controller = 'Controller';
+        $method = 'Avis';
+        break;
+    case 'CarteInteractive':
+        $controller = 'Controller';
+        $method = 'CarteInteractive';
+        break;
+    case 'Classement':            
+        $controller = 'Controller';
+        $method = 'Classement';
+        break;
+    case 'Deconection':            
+        $controller = 'Controller';
+        $method = 'Deconection';
+        break;
+    case 'InfoGenerales':         
+        $controller = 'Controller';
+        $method = 'InfoGenerales';
+        break;
     case 'Connexion':
-        $controller = 'Controle';
+        $controller = 'Controller';
         $method = 'Connexion';
         break;
-
+    case 'Inscription':
+        $controller = 'Controller';
+        $method = 'Inscription';
+        break;
     default:
-        $controller = 'Controle';
+        $controller = 'Controller';
         $method = 'Connexion';
         break;
 }

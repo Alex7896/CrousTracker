@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Accueil - Stage BTS</title>
+    <title>Page Accueil - Crous Tracker</title>
     <link rel="stylesheet" href="CSS/general.css">
 </head>
 <body>
 
 <!-- Zone de contenu principal -->
-<div id="corps">
+<div class = "CrousTracker" id="corps">
     <form action="index.php?page=Connexion" method="post" id="form_connexion">
-    <a href="#" id="user"><span></span></a>
-    <div class="section" id="section_connexion">
+    
+
+    <div class="user" id="section_connexion" >
 
         <label for="login">Identifiant :</label>
         <input type="text" name="login" id="login" required></p>
@@ -21,6 +22,7 @@
         <input type="password" name="mdp" id="mdp" required>
     </div>
     <button type="submit">Se connecter</button>
+    <button type="submit">S'inscrire</button>
     </form>
 </div>
 
