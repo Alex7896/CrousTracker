@@ -5,13 +5,18 @@ use App\Controller;
 $page = $_GET['page'] ?? null; // Page active
 
 // Initialisation du contrôleur
-$controller = null;
-$method = null;
+$controller = 'Controller';
+$method = 'Connexion';
 
 switch ($page) {
+    case 'Connexion':
+        $controller = 'Controle';
+        $method = 'Connexion';
+        break;
+
     default:
-        $controller = '';
-        $method = '';
+        $controller = 'Controle';
+        $method = 'Connexion';
         break;
 }
 
@@ -20,7 +25,14 @@ if ($controller && $method) {
     require_once '../config/database.php'; // Connexion à la base de données
     $controllerClass = 'App\\Controller\\' . $controller;
     $controllerObject = new $controllerClass($pdo);
-    $controllerObject->$method();
+
+    //si methode need id d'utilsateur de la base de donne alors retour aussi l'id
+    if ($page == 'Connexion') {
+        $controllerObject->$method($id);
+    }else{
+        $controllerObject->$method();$controllerObject->$method();
+    }
+    
 } else {
     echo "404 Not Found"; // Faire une page plus jolie pour le not found
 }
