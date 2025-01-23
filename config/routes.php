@@ -17,7 +17,7 @@ switch ($page) {
         $controller = 'Controller';
         $method = 'AjoutAvis';
         break;
-    case 'Avis':    
+    case 'Avis':
         $controller = 'Controller';
         $method = 'Avis';
         break;
@@ -25,15 +25,15 @@ switch ($page) {
         $controller = 'Controller';
         $method = 'CarteInteractive';
         break;
-    case 'Classement':            
+    case 'Classement':
         $controller = 'Controller';
         $method = 'Classement';
         break;
-    case 'Deconection':            
+    case 'Deconection':
         $controller = 'Controller';
         $method = 'Deconection';
         break;
-    case 'InfoGenerales':         
+    case 'InfoGenerales':
         $controller = 'Controller';
         $method = 'InfoGenerales';
         break;
