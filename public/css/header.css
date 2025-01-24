@@ -35,11 +35,9 @@ header {
     }
 }
 
-.header-left:hover {
-    h1 {
-        color: red; /* Text color becomes the background color to create the "incrusted" effect */
-        text-shadow: 1px 1px 0px #bbb, 3px 3px 0px #999, 5px 5px 0px #777;
-    }
+.header-left:hover h1 {
+    color: red; /* Text color becomes the background color to create the "incrusted" effect */
+    text-shadow: 1px 1px 0px #bbb, 3px 3px 0px #999, 5px 5px 0px #777;
 }
 
 header button {

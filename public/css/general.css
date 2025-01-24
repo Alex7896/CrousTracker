@@ -5,12 +5,16 @@ body {
     background-color: #FFFFFF;
 }
 
+main {
+    height: 100vh;
+    margin-top: auto;
+}
 
 .center {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    min-height: calc(100vh);
 }
 .login-container {
     background-color: #E0E0E0;
