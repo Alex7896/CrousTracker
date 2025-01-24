@@ -8,6 +8,10 @@ $page = $_GET['page'] ?? null; // Page active
 $controller = null;
 $method = null;
 switch ($page) {
+    case 'connexion':
+        $controller = 'ConnexionController';
+        $method = 'index';
+        break;
     default:
         $controller = 'AccueilMapController';
         $method = 'index';

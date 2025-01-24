@@ -5,6 +5,6 @@ class AccueilMapController extends BaseController
 {
     public function index() {
         // Afficher la page d'accueil
-        echo $this->renderView('accueilMap.twig');
+        $this->renderView('accueilMap.twig');
     }
 }

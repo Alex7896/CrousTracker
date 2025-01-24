@@ -9,6 +9,6 @@ class BaseController
         $loader = new \Twig\Loader\FilesystemLoader('../src/View');
         $twig = new \Twig\Environment($loader);
 
-        return $twig->render($view, $data);
+        echo $twig->render($view, $data);
     }
 }
