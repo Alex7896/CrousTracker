@@ -1,2 +1,6 @@
-.user{background-image: url(../icons/user.png);}
-.CrousTracker{background-image: url(../icons/CrousTracker.png);}
+/* Styles globaux */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFFFFF;
+}

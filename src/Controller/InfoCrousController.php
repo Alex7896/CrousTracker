@@ -2,7 +2,7 @@
 namespace App\Controller;
 use App\Model\Model1;
 
-class Controller
+class InfoCrousController
 {
     protected function renderView($view, $data = []) {
         $loader = new \Twig\Loader\FilesystemLoader('../src/vue');

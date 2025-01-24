@@ -1,0 +1,78 @@
+/* Barre de header */
+header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    background-color: #E0E0E0;
+    right: 0;
+    left: 0;
+    color: white;
+    padding: 5px 20px;
+    box-shadow: 0 3px 6px red;
+}
+
+/* Bouton gauche (icône + titre) */
+.header-left {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    .site-icon {
+        width: 70px;
+        height: 70px;
+        margin-right: 10px;
+        border-radius: 50%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin: 0;
+        color: red;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+}
+
+.header-left:hover {
+    h1 {
+        color: #E0E0E0; /* Text color becomes the background color to create the "incrusted" effect */
+        text-shadow: 1px 1px 3px red, -1px -1px 3px red; /* Create the engraved effect */
+    }
+    .site-icon {
+
+    }
+}
+
+header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Section droite (icônes) */
+.header-right {
+    display: flex;
+    gap: 15px;
+}
+
+.header-button {
+
+}
+
+.icon-button img {
+    width: 30px;
+    height: 30px;
+    filter: invert(0); /* Pour rendre les icônes blanches sur fond sombre */
+    transition: transform 0.2s ease, opacity 0.2s ease, filter 0.3s ease;
+}
+
+.header button:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+    filter: invert(1);
+}

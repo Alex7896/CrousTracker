@@ -1,6 +1,6 @@
 <?php
 $host = '127.0.0.1'; // Votre hôte de base de données
-$db = '';     // Le nom de votre base de données
+$db = 'crous_tracker';     // Le nom de votre base de données
 $user = 'root';       // Utilisateur MySQL
 $pass = '';           // Mot de passe MySQL
 $charset = 'utf8mb4'; // Jeu de caractères
