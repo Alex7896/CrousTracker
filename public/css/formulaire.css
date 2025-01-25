@@ -36,7 +36,7 @@
     box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
 
-.login-container input[type=submit] {
+.login-container input[type=submit], button {
     width: 100%;
     padding: 12px 15px;
     background-color: red;
@@ -48,7 +48,38 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.login-container input[type=submit]:hover {
+.login-container input[type=submit]:hover, button:hover {
     background-color: #cc0000;
     transform: scale(1.05);
+}
+
+
+/* Message d'information */
+.info-message {
+    font-size: 1.2rem;
+    color: green;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Bouton principal */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: red;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Effets au survol pour le bouton principal */
+.btn-primary:hover {
+    background-color: #ea3814;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

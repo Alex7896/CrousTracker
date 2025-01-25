@@ -16,8 +16,10 @@
             {% endif %}
         </div>
         {% else %}
-        <div>Vous etes déjà connecté</div>
-        <button onclick="updateUrlParam('action','deconnexion')">Déconnexion</button>
+            <div class="login-container">
+                <div class="info-message">Vous êtes déjà connecté</div>
+                <button onclick="updateUrlParam('action','deconnexion')" class="btn-primary">Déconnexion</button>
+            </div>
         {% endif %}
     </main>
 {% endblock %}

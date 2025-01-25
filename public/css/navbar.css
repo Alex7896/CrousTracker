@@ -55,7 +55,7 @@
 
 /* Lorsque la sidebar est réduite */
 .sidebar-navbar.reduit {
-    width: 70px;
+    width: 60px;
 }
 
 .reduit .sidebar-navbar-item span {
