@@ -7,10 +7,31 @@ function updateUrlParam(param, value) {
 document.addEventListener('DOMContentLoaded', () => {
     var map = L.map('map').setView([45.77866149222399, 4.872053750875164], 15);
 
+
+    // pour modif l'icon
+    var redIcon = L.icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        shadowSize: [41, 41]
+    });
+    //pour ajouter un ping
+    var marker = L.marker([45.778796,4.871728],
+        { icon: redIcon}).addTo(map);// là c'est l'adresse du crous la doua mais faudra for le bordel
+
+    //pour ajouter le msg en haut du ping
+    marker.bindPopup("<a href='http://localhost'> world!</a><br>I am a popup.").openPopup();
+
+
+
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+
 });
 
 /*document.addEventListener('DOMContentLoaded', () => {
