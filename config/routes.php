@@ -15,6 +15,9 @@ switch ($page) {
             case 'deconnexion':
                 $method = 'deconnexion';
                 break;
+            case 'inscription':
+                $method = 'inscription';
+                break;
             default:
                 $method = 'index';
                 break;

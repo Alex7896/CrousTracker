@@ -1,24 +1,19 @@
 {% extends "includes/base.twig" %}
-
 {% block corps %}
     <main class="center">
-        {% if not isLogged %}
         <div class="login-container">
-            <h2>Connexion</h2>
+            <h2>Inscription</h2>
             <form action="#" method="post">
                 <input type="text" placeholder="Identifiant" name="login" required>
                 <input type="password" placeholder="Mot de passe" name="mdp" required>
-                <input type="submit" value="Se connecter">
-                <button onclick="updateUrlParam('action','inscription')">S'inscire</button>
+                <input type="text" placeholder="Prénom" name="prenom" required>
+                <input type="text" placeholder="Nom" name="nom" required>
+                <input type="submit" value="S'inscire">
             </form>
             {% if erreur is not null %}
                 <div>{{ erreur }}</div>
             {% endif %}
         </div>
-        {% else %}
-        <div>Vous etes déjà connecté</div>
-        <button onclick="updateUrlParam('action','deconnexion')">Déconnexion</button>
-        {% endif %}
     </main>
 {% endblock %}
 

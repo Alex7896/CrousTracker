@@ -14,4 +14,9 @@ class User
         $stmt->execute([$login, $mdp]);
         return !empty($stmt->fetchAll());
     }
+
+    public function addUser($login, $mdp, $nom, $prenom) {
+        $stmt = $this->pdo->prepare("INSERT INTO user (login, mdp, nom, prenom) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$login, $mdp, $nom, $prenom]);
+    }
 }

@@ -6,10 +6,10 @@ use App\Model\User;
 
 class ConnexionController extends BaseController
 {
-    private $UserModel;
+    private $userModel;
 
     public function __construct($pdo){
-        $this->UserModel = new User($pdo);
+        $this->userModel = new User($pdo);
     }
 
     public function index(){
@@ -17,7 +17,7 @@ class ConnexionController extends BaseController
             $login = $_POST['login'];
             $mdp = $_POST['mdp'];
 
-            if($this->UserModel->checkUser($login, $mdp)){
+            if($this->userModel->checkUser($login, $mdp)){
                 session_start();
                 $_SESSION['isLogged'] = true;
                 header('Location: index.php?page=accueil');
@@ -27,6 +27,24 @@ class ConnexionController extends BaseController
             }
         } else {
             $this->renderView('connexion.twig');
+        }
+    }
+
+    public function inscription()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $login = $_POST['login'];
+            $mdp = $_POST['mdp'];
+            $prenom = $_POST['prenom'];
+            $nom = $_POST['nom'];
+
+            $this->userModel->addUser($login, $mdp, $prenom, $nom);
+            session_start();
+            $_SESSION['isLogged'] = true;
+
+            header('Location: index.php?page=accueil');
+        } else {
+            $this->renderView('inscription.twig');
         }
     }
 
