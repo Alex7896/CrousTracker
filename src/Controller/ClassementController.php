@@ -5,6 +5,8 @@ namespace App\Controller;
 class ClassementController extends BaseController
 {
     public function index() {
-        $this->renderView('classement.twig');
+        $this->renderView('infoCrous/nav.twig');
     }
+
+
 }

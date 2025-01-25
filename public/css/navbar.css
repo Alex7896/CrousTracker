@@ -1,6 +1,6 @@
 /* Barre de navigation */
 .sidebar-navbar {
-    position: fixed; /* Fixée à gauche */
+    position: sticky;
     top: 70px; /* En dessous du header */
     left: 0;
     background-color: #FAFAFA; /* Couleur de fond différente du header */
