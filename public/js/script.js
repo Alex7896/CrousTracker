@@ -12,3 +12,41 @@ document.addEventListener('DOMContentLoaded', () => {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Fonction pour mettre à jour le titre de la page en fonction du paramètre 'page'
+    function updateTitle(page) {
+        let pageTitle = '';
+
+        switch(page) {
+            case 'menu':
+                pageTitle = 'Menu - MonCrous';
+                break;
+            case 'details':
+                pageTitle = 'Détails - MonCrous';
+                break;
+            case 'avis':
+                pageTitle = 'Avis - MonCrous';
+                break;
+            default:
+                pageTitle = 'MonCrous';
+                break;
+        }
+
+        document.title = pageTitle; // Mise à jour du titre
+    }
+
+    // Lorsque la page est chargée, on récupère le paramètre 'page' de l'URL et on met à jour le titre
+    const page = new URLSearchParams(window.location.search).get('page');
+    if (page) {
+        updateTitle(page);
+    }
+
+    // Ajoute un event listener pour détecter les changements d'URL via updateUrlParam
+    window.addEventListener('popstate', () => {
+        const page = new URLSearchParams(window.location.search).get('page');
+        if (page) {
+            updateTitle(page);
+        }
+    });
+});

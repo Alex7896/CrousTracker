@@ -1,6 +1,25 @@
 {% extends "includes/base.twig" %}
 {% block corps %}
 
-Classement a implémenter !!!
+    <nav class="sidebar-navbar">
+        <ul class="sidebar-navbar-list">
+            <li>
+                <a class="sidebar-navbar-item" onclick="updateUrlParam('page','menu')">
+                    <img src="icons/details-36-512.png" alt="Menu Icon" class="sidebar-navbar-icon">Menu
+                </a>
+            </li>
+            <li>
+                <a class="sidebar-navbar-item" onclick="updateUrlParam('page','details')">
+                    <img src="icons/dishes-plan-512.png" alt="Details Icon" class="sidebar-navbar-icon">Details
+                </a>
+            </li>
+            <li>
+                <a class="sidebar-navbar-item" onclick="updateUrlParam('page','avis')">
+                    <img src="icons/star-244-512.png" alt="Avis Icon" class="sidebar-navbar-icon">Avis
+                </a>
+            </li>
+        </ul>
+    </nav>
+
 
 {% endblock %}
