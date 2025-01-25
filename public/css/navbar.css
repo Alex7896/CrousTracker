@@ -91,8 +91,8 @@ body.reduit .sidebar-navbar-item img {
     flex-direction: column;
     gap: 5px;
     z-index: 1000; /* Assurer que le bouton soit devant */
+    width: 100%; /* Prend toute la largeur quand la sidebar est ouverte */
 }
-
 
 /* Style des boutons de réduction/agrandissement */
 .toggle-button {
@@ -103,12 +103,25 @@ body.reduit .sidebar-navbar-item img {
     transition: background-color 0.3s ease, transform 0.3s ease;
     border: none;
     font-size: 20px;
-    width: 45px;  /* Largeur du carré */
-    height: 45px;  /* Hauteur du carré */
+    height: 45px;  /* Hauteur constante */
     display: flex;
     align-items: center; /* Centrer verticalement */
     justify-content: center; /* Centrer horizontalement */
     border-radius: 5px;  /* Coins légèrement arrondis, à ajuster si besoin */
+    width: 80%; /* Prend 80% de la largeur de son parent */
+    margin: 0 auto; /* Centrer le bouton horizontalement */
+}
+
+
+/* Lorsque la sidebar est réduite, ajuster la taille du bouton */
+body.reduit .sidebar-navbar-toggle {
+    width: auto; /* Ne prend plus toute la largeur */
+}
+
+body.reduit .toggle-button {
+    width: 45px;  /* Réduit la largeur du bouton à une taille plus petite quand la sidebar est réduite */
+    height: 45px;  /* Assurer une hauteur constante */
+    justify-content: center; /* Garde l'image (ou le triangle) centré */
 }
 
 /* Animation sur les boutons */
@@ -118,13 +131,11 @@ body.reduit .sidebar-navbar-item img {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
 }
 
-
-
-/* Icône des boutons */
-.toggle-button:before {
-    font-size: 20px;
-    color: #333;
-    font-weight: bold;
+/* Styles pour l'image du bouton */
+.toggle-image {
+    width: 24px; /* Ajuste la taille de l'image */
+    height: 24px;
+    transition: transform 0.3s ease; /* Transition pour agrandir ou rétrécir l'image */
 }
 
 /* Ajouter des styles pour l'icône de réduction */
