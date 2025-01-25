@@ -2,23 +2,26 @@
 {% block corps %}
 
     <nav class="sidebar-navbar">
-        <ul class="sidebar-navbar-list">
-            <li>
-                <a class="sidebar-navbar-item" onclick="updateUrlParam('page','details')">
-                    <img src="icons/details-36-512.png" alt="Details Icon" class="sidebar-navbar-icon">Details
-                </a>
-            </li>
-            <li>
-                <a class="sidebar-navbar-item" onclick="updateUrlParam('page','menu')">
-                    <img src="icons/dishes-plan-512.png" alt="Menu Icon" class="sidebar-navbar-icon">Menu
-                </a>
-            </li>
-            <li>
-                <a class="sidebar-navbar-item" onclick="updateUrlParam('page','avis')">
-                    <img src="icons/star-244-512.png" alt="Avis Icon" class="sidebar-navbar-icon">Avis
-                </a>
-            </li>
-        </ul>
+        <div class="sidebar-navbar-list">
+            <a class="sidebar-navbar-item" onclick="updateUrlParam('page','menu')">
+                <img src="icons/details-36-512.png" alt="Menu Icon" class="sidebar-navbar-icon">
+                <span>Menu</span>
+            </a>
+            <a class="sidebar-navbar-item" onclick="updateUrlParam('page','details')">
+                <img src="icons/dishes-plan-512.png" alt="Details Icon" class="sidebar-navbar-icon">
+                <span>Details</span>
+            </a>
+            <a class="sidebar-navbar-item" onclick="updateUrlParam('page','avis')">
+                <img src="icons/star-244-512.png" alt="Avis Icon" class="sidebar-navbar-icon">
+                <span>Avis</span>
+            </a>
+        </div>
+
+        <!-- Boutons pour agrandir et réduire la sidebar (placés à la fin) -->
+        <div class="sidebar-navbar-toggle">
+            <button id="icon_gauche" class="toggle-button actif" onclick="agrandir()">&#9654;</button>
+            <button id="icon_droite" class="toggle-button" onclick="reduire()">&#9664;</button>
+        </div>
     </nav>
 
 

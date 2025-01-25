@@ -1,72 +1,146 @@
-/* Barre de navigation */
+/* Barre de la sidebar */
 .sidebar-navbar {
     position: sticky;
-    top: 70px; /* En dessous du header */
+    top: 0;
     left: 0;
-    background-color: #FAFAFA; /* Couleur de fond différente du header */
-    width: 240px; /* Largeur de la barre */
-    height: calc(100vh - 70px); /* Toute la hauteur de l'écran moins celle du header */
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Ombre sur le côté droit */
-    display: flex;
-    flex-direction: column; /* Organiser les éléments en colonne */
-    padding: 20px 15px;
-    box-sizing: border-box;
-    z-index: 500; /* Sous le header */
-}
-
-/* Titre dans la barre latérale */
-.sidebar-navbar-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #EA3814; /* Rouge pour correspondre à la DA */
-    margin-bottom: 20px;
-    text-align: center; /* Centrer le texte */
-}
-
-/* Liste des liens */
-.sidebar-navbar-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    height: 100%;
+    width: 250px; /* Largeur normale */
+    background-color: #E0E0E0;
+    box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.2); /* Ombre à droite */
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    padding: 10px;
+    z-index: 999;  /* Permet à la sidebar de rester devant */
+    transition: all 0.3s ease; /* Transition fluide */
 }
 
-/* Lien individuel */
+/* Lorsque la sidebar est réduite */
+body.reduit .sidebar-navbar {
+    width: 70px; /* Largeur réduite */
+    padding: 10px 5px;
+}
+
+/* Titres de la sidebar */
+.sidebar-navbar-title {
+    color: red;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    text-align: center;
+    transition: opacity 0.3s ease;
+}
+
+body.reduit .sidebar-navbar-title {
+    opacity: 0; /* Cache le titre quand la sidebar est réduite */
+}
+
+/* Liste des items de la sidebar */
+.sidebar-navbar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
 .sidebar-navbar-item {
     display: flex;
     align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
     text-decoration: none;
-    color: #333; /* Couleur du texte */
-    font-size: 1.2rem;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .sidebar-navbar-item:hover {
-    background-color: #EA3814; /* Couleur d'accent au survol */
-    color: white;
-    transform: scale(1.05);
+    background-color: #ea3814;
+    transform: scale(1.05); /* Légère animation lors du survol */
 }
 
-/* Icônes dans les liens */
-.sidebar-navbar-icon {
-    width: 24px;
-    height: 24px;
-    margin-right: 10px; /* Espace entre l'icône et le texte */
+.sidebar-navbar-item img {
+    width: 30px; /* Taille des icônes */
+    height: 30px;
+    margin-right: 10px;
     transition: filter 0.3s ease;
 }
 
-.sidebar-navbar-item:hover .sidebar-navbar-icon {
-    filter: invert(1); /* Inversion de la couleur au survol */
+/* Change l'icône lors du survol */
+.sidebar-navbar-item:hover img {
+    filter: invert(1); /* Inverse les couleurs de l'icône */
 }
 
-/* Élément actif */
-.sidebar-navbar-item.active {
-    background-color: #007BFF; /* Couleur pour le lien actif */
-    color: white;
+/* Masquer le texte des items quand la sidebar est réduite */
+body.reduit .sidebar-navbar-item span {
+    visibility: hidden; /* Cache le texte */
+}
+
+/* Lorsque la sidebar est réduite, on garde seulement l'icône */
+body.reduit .sidebar-navbar-item img {
+    margin-right: 0; /* Évite l'espace supplémentaire à droite de l'icône */
+}
+
+/* Toggle pour rétrécir ou agrandir la sidebar */
+.sidebar-navbar-toggle {
+    position: absolute;
+    bottom: 5%; /* Baisse un peu le bouton (de 10% à 5%) */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1000; /* Assurer que le bouton soit devant */
+}
+
+
+/* Style des boutons de réduction/agrandissement */
+.toggle-button {
+    background-color: #f0f0f0; /* Même couleur que les items de la sidebar */
+    padding: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    font-size: 20px;
+    width: 45px;  /* Largeur du carré */
+    height: 45px;  /* Hauteur du carré */
+    display: flex;
+    align-items: center; /* Centrer verticalement */
+    justify-content: center; /* Centrer horizontalement */
+    border-radius: 5px;  /* Coins légèrement arrondis, à ajuster si besoin */
+}
+
+/* Animation sur les boutons */
+.toggle-button:hover {
+    background-color: #ea3814; /* Couleur au survol */
+    transform: scale(1.1); /* Légère agrandissement */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+}
+
+
+
+/* Icône des boutons */
+.toggle-button:before {
+    font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Ajouter des styles pour l'icône de réduction */
+#icon_gauche {
+    display: none;
+}
+
+body.reduit #icon_gauche {
+    display: block;
+}
+
+/* Ajouter des styles pour l'icône d'agrandissement */
+#icon_droite {
+    display: block;
+}
+
+body.reduit #icon_droite {
+    display: none;
 }

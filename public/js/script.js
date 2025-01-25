@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }).addTo(map);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+/*document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour mettre à jour le titre de la page en fonction du paramètre 'page'
     function updateTitle(page) {
         let pageTitle = '';
@@ -49,4 +49,25 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTitle(page);
         }
     });
-});
+});*/
+
+function agrandir() {
+    document.body.classList.remove("reduit");
+    document.getElementById("icon_droite").classList.add("actif");
+    document.getElementById("icon_gauche").classList.remove("actif");
+    localStorage.setItem('navBar', 'agrandit');
+}
+
+function reduire() {
+    document.body.classList.add("reduit");
+    document.getElementById("icon_gauche").classList.add("actif");
+    document.getElementById("icon_droite").classList.remove("actif");
+    localStorage.setItem('navBar', 'reduit');
+}
+window.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem('navBar')==='reduit'){
+        reduire();
+    } else {
+        agrandir();
+    }
+})
