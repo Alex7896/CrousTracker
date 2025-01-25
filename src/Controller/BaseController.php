@@ -6,8 +6,10 @@ class BaseController
 {
     protected function renderView($view, $data = [])
     {
-        session_start();
-        if (isset($_SESSION['isLogged']) && $_SESSION['isLogged']) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        if (isset($_SESSION['isLogged'])) {
             $data['isLogged'] = $_SESSION['isLogged'];
         }
 

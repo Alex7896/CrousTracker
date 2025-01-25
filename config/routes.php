@@ -3,6 +3,7 @@ use App\Controller;
 
 // Récupérer les paramètres de l'URL
 $page = $_GET['page'] ?? null; // Page active
+$action = $_GET['action'] ?? null;
 
 // Initialisation du contrôleur
 $controller = null;
@@ -10,7 +11,14 @@ $method = null;
 switch ($page) {
     case 'connexion':
         $controller = 'ConnexionController';
-        $method = 'index';
+        switch ($action) {
+            case 'deconnexion':
+                $method = 'deconnexion';
+                break;
+            default:
+                $method = 'index';
+                break;
+        }
         break;
     case 'classement':
         $controller = 'ClassementController';

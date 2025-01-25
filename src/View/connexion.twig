@@ -2,7 +2,8 @@
 
 {% block corps %}
     <main class="center">
-        {% if isLogged is null %}
+        {{ isLogged }}
+        {% if not isLogged %}
         <div class="login-container">
             <h2>Connexion</h2>
             <form action="#" method="post">
@@ -17,6 +18,7 @@
         </div>
         {% else %}
         <div>Vous etes déjà connecté</div>
+        <button onclick="updateUrlParam('action','deconnexion')">Déconnexion</button>
         {% endif %}
     </main>
 {% endblock %}
