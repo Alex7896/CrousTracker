@@ -7,6 +7,4 @@ class ClassementController extends BaseController
     public function index() {
         $this->renderView('infoCrous/nav.twig');
     }
-
-
 }

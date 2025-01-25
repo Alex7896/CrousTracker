@@ -4,33 +4,14 @@
     top: 0;
     left: 0;
     height: 100%;
-    width: 250px; /* Largeur normale */
+    width: 250px;
     background-color: #E0E0E0;
-    box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.2); /* Ombre à droite */
+    box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     padding: 10px;
-    z-index: 999;  /* Permet à la sidebar de rester devant */
-    transition: all 0.3s ease; /* Transition fluide */
-}
-
-/* Lorsque la sidebar est réduite */
-body.reduit .sidebar-navbar {
-    width: 70px; /* Largeur réduite */
-    padding: 10px 5px;
-}
-
-/* Titres de la sidebar */
-.sidebar-navbar-title {
-    color: red;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    text-align: center;
-    transition: opacity 0.3s ease;
-}
-
-body.reduit .sidebar-navbar-title {
-    opacity: 0; /* Cache le titre quand la sidebar est réduite */
+    z-index: 999;
+    transition: all 0.3s ease;
 }
 
 /* Liste des items de la sidebar */
@@ -44,6 +25,7 @@ body.reduit .sidebar-navbar-title {
 .sidebar-navbar-item {
     display: flex;
     align-items: center;
+    align-content: center;
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -55,103 +37,83 @@ body.reduit .sidebar-navbar-title {
 }
 
 .sidebar-navbar-item:hover {
+    color: #fff;
     background-color: #ea3814;
-    transform: scale(1.05); /* Légère animation lors du survol */
+    transform: scale(1.05);
 }
 
 .sidebar-navbar-item img {
-    width: 30px; /* Taille des icônes */
+    width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin-right: 15px;
     transition: filter 0.3s ease;
 }
 
-/* Change l'icône lors du survol */
 .sidebar-navbar-item:hover img {
-    filter: invert(1); /* Inverse les couleurs de l'icône */
+    filter: invert(1);
 }
 
-/* Masquer le texte des items quand la sidebar est réduite */
-body.reduit .sidebar-navbar-item span {
-    visibility: hidden; /* Cache le texte */
+/* Lorsque la sidebar est réduite */
+.sidebar-navbar.reduit {
+    width: 70px;
 }
 
-/* Lorsque la sidebar est réduite, on garde seulement l'icône */
-body.reduit .sidebar-navbar-item img {
-    margin-right: 0; /* Évite l'espace supplémentaire à droite de l'icône */
+.reduit .sidebar-navbar-item span {
+    visibility: hidden;
+}
+
+.reduit .sidebar-navbar-item img {
+    margin-right: 0;
 }
 
 /* Toggle pour rétrécir ou agrandir la sidebar */
 .sidebar-navbar-toggle {
     position: absolute;
-    bottom: 5%; /* Baisse un peu le bouton (de 10% à 5%) */
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     gap: 5px;
-    z-index: 1000; /* Assurer que le bouton soit devant */
-    width: 100%; /* Prend toute la largeur quand la sidebar est ouverte */
+    z-index: 100;
+    width: 100%;
 }
 
 /* Style des boutons de réduction/agrandissement */
 .toggle-button {
-    background-color: #f0f0f0; /* Même couleur que les items de la sidebar */
+    background-color: #f0f0f0;
     padding: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
     border: none;
     font-size: 20px;
-    height: 45px;  /* Hauteur constante */
-    display: flex;
-    align-items: center; /* Centrer verticalement */
-    justify-content: center; /* Centrer horizontalement */
-    border-radius: 5px;  /* Coins légèrement arrondis, à ajuster si besoin */
-    width: 80%; /* Prend 80% de la largeur de son parent */
-    margin: 0 auto; /* Centrer le bouton horizontalement */
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 45px;
+    height: 45px;
+    display: none;
 }
 
-
-/* Lorsque la sidebar est réduite, ajuster la taille du bouton */
-body.reduit .sidebar-navbar-toggle {
-    width: auto; /* Ne prend plus toute la largeur */
+.toggle-button.actif {
+    display: block;
 }
 
-body.reduit .toggle-button {
-    width: 45px;  /* Réduit la largeur du bouton à une taille plus petite quand la sidebar est réduite */
-    height: 45px;  /* Assurer une hauteur constante */
-    justify-content: center; /* Garde l'image (ou le triangle) centré */
-}
-
-/* Animation sur les boutons */
 .toggle-button:hover {
-    background-color: #ea3814; /* Couleur au survol */
-    transform: scale(1.1); /* Légère agrandissement */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+    background-color: #ea3814;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Styles pour l'image du bouton */
 .toggle-image {
-    width: 24px; /* Ajuste la taille de l'image */
+    width: 24px;
     height: 24px;
-    transition: transform 0.3s ease; /* Transition pour agrandir ou rétrécir l'image */
+    transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-/* Ajouter des styles pour l'icône de réduction */
-#icon_gauche {
-    display: none;
-}
-
-body.reduit #icon_gauche {
-    display: block;
-}
-
-/* Ajouter des styles pour l'icône d'agrandissement */
-#icon_droite {
-    display: block;
-}
-
-body.reduit #icon_droite {
-    display: none;
+.toggle-button:hover .toggle-image {
+    filter: invert(1);
 }

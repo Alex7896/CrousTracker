@@ -27,6 +27,10 @@ switch ($page) {
         $controller = 'ClassementController';
         $method = 'index';
         break;
+    case 'actualiser':
+        $controller = 'ActualiserController';
+        $method = 'index';
+        break;
     default:
         $controller = 'AccueilMapController';
         $method = 'index';
