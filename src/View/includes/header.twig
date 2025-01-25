@@ -1,17 +1,19 @@
 <header>
-    <button class="header-left">
-        <img src="icons/CrousTracker.png" alt="Icon du site" class="site-icon">
-        <h1 class="titre">CrousTracker</h1>
-    </button>
+    <div>
+        <a class="home-button" onclick="updateUrlParam('page','accueil')">
+            <img src="icons/favicon.png" alt="Icon du site" class="site-icon">
+            <h1>CrousTracker</h1>
+        </a>
+    </div>
     <div class="header-right">
-        <button class="icon-button" title="Se connecter" onclick=";">
-            <img src="icons/classement.png" alt="Classement">
-        </button>
-        <button class="icon-button" title="Actualiser les données">
-            <img src="icons/reload.png" alt="Actualiser">
-        </button>
-        <button class="icon-button" title="Page de classement">
-            <img src="icons/user.png" alt="Se connecter">
-        </button>
+        <a class="nav-button" title="Page de classement" onclick="updateUrlParam('page','classement')">
+            <img src="icons/classement.svg" alt="Classement">
+        </a>
+        <a class="nav-button" title="Actualiser les données" onclick="updateUrlParam('page','actualiser')">
+            <img src="icons/refresh.png" alt="Actualiser">
+        </a>
+        <a class="nav-button" title="Se connecter" onclick="updateUrlParam('page','connexion')">
+            <img src="icons/user.svg" alt="Se connecter">
+        </a>
     </div>
 </header>

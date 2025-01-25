@@ -12,6 +12,10 @@ switch ($page) {
         $controller = 'ConnexionController';
         $method = 'index';
         break;
+    case 'classement':
+        $controller = 'ClassementController';
+        $method = 'index';
+        break;
     default:
         $controller = 'AccueilMapController';
         $method = 'index';
@@ -24,5 +28,5 @@ if ($controller && $method) {
     $controllerObject = new $controllerClass($pdo);
     $controllerObject->$method();
 } else {
-    echo "404 Not Found"; // Faire une page plus jolie pour le not found
+    echo "404 Not Found";
 }
