@@ -92,9 +92,13 @@
     justify-content: center;
     border-radius: 5px;
     margin: 0 auto;
-    width: 45px;
+    width: 80%;
     height: 45px;
     display: none;
+}
+
+.reduit .toggle-button {
+    width: 60px;
 }
 
 .toggle-button.actif {
