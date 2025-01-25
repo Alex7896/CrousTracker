@@ -2,6 +2,7 @@
 
 {% block corps %}
     <main class="center">
+        {% if isLogged is null %}
         <div class="login-container">
             <h2>Connexion</h2>
             <form action="#" method="post">
@@ -10,7 +11,13 @@
                 <input type="submit" value="Log in">
                 <button>S'inscire</button>
             </form>
+            {% if erreur is not null %}
+                <div>{{ erreur }}</div>
+            {% endif %}
         </div>
+        {% else %}
+        <div>Vous etes déjà connecté</div>
+        {% endif %}
     </main>
 {% endblock %}
 

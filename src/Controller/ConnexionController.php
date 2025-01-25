@@ -12,8 +12,6 @@ class ConnexionController extends BaseController
         $this->UserModel = new User($pdo);
     }
 
-
-
     public function index(){
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $login = $_POST['login'];
@@ -25,7 +23,7 @@ class ConnexionController extends BaseController
                 header('Location: index.php?page=accueil');
                 exit();
             } else {
-                $this->renderView('connexion.twig', ['erreur' => 'login, mot de passe ou role incorrect']);
+                $this->renderView('connexion.twig', ['erreur' => 'login ou mot de passe incorrect']);
             }
         } else {
             $this->renderView('connexion.twig');
