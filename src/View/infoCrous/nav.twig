@@ -1,14 +1,14 @@
 <nav class="sidebar-navbar">
     <div class="sidebar-navbar-list">
-        <a class="sidebar-navbar-item" onclick="updateUrlParam('page','menu')">
-            <img src="icons/details-36-512.png" alt="Menu Icon" class="sidebar-navbar-icon">
-            <span>Menu</span>
-        </a>
-        <a class="sidebar-navbar-item" onclick="updateUrlParam('page','details')">
-            <img src="icons/dishes-plan-512.png" alt="Details Icon" class="sidebar-navbar-icon">
+        <a class="sidebar-navbar-item" onclick="updateUrlParam({page:'details', id: true})">
+            <img src="icons/details-36-512.png" alt="Details Icon" class="sidebar-navbar-icon">
             <span>Details</span>
         </a>
-        <a class="sidebar-navbar-item" onclick="updateUrlParam('page','avis')">
+        <a class="sidebar-navbar-item" onclick="updateUrlParam({page:'menu', id: true})">
+            <img src="icons/dishes-plan-512.png" alt="Details Icon" class="sidebar-navbar-icon">
+            <span>Menu</span>
+        </a>
+        <a class="sidebar-navbar-item" onclick="updateUrlParam({page:'avis', id: true})">
             <img src="icons/star-244-512.png" alt="Avis Icon" class="sidebar-navbar-icon">
             <span>Avis</span>
         </a>

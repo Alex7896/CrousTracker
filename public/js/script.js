@@ -1,8 +1,44 @@
-function updateUrlParam(param, value) {
+function updateUrlParam({page, action, id}) {
     let url = new URL(window.location.href);
-    url.searchParams.set(param, value);
-    window.location.href = url;
+
+    const currentParams = {};
+    if (url.searchParams.has('page')) currentParams.page = url.searchParams.get('page');
+    if (url.searchParams.has('action')) currentParams.action = url.searchParams.get('action');
+    if (url.searchParams.has('id')) currentParams.id = url.searchParams.get('id');
+
+    url.search = '';
+    if (page !== undefined) {
+        if (page === true) {
+            if (currentParams.page) {
+                url.searchParams.set('page', currentParams.page);
+            }
+        } else {
+            url.searchParams.set('page', page);
+        }
+    }
+
+    if (action !== undefined) {
+        if (action === true) {
+            if (currentParams.action) {
+                url.searchParams.set('action', currentParams.action);
+            }
+        } else {
+            url.searchParams.set('action', action);
+        }
+    }
+
+    if (id !== undefined) {
+        if (id === true) {
+            if (currentParams.id) {
+                url.searchParams.set('id', currentParams.id);
+            }
+        } else {
+            url.searchParams.set('id', id);
+        }
+    }
+    window.location.href = url.toString();
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     var map = L.map('map').setView([45.77866149222399, 4.872053750875164], 15);
@@ -18,12 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
         shadowSize: [41, 41]
     });
     //pour ajouter un ping
-    var marker = L.marker([45.778796,4.871728],
-        { icon: redIcon}).addTo(map);// là c'est l'adresse du crous la doua mais faudra for le bordel
+    var marker = L.marker([45.778796, 4.871728],
+        {icon: redIcon}).addTo(map);// là c'est l'adresse du crous la doua mais faudra for le bordel
 
     //pour ajouter le msg en haut du ping
     marker.bindPopup("<a href='http://localhost'> world!</a><br>I am a popup.").openPopup();
-
 
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -85,8 +120,9 @@ function reduire() {
     document.getElementById("icon_droite")?.classList.remove("actif");
     localStorage.setItem('navBar', 'reduit');
 }
+
 window.addEventListener('DOMContentLoaded', () => {
-    if(localStorage.getItem('navBar')==='reduit'){
+    if (localStorage.getItem('navBar') === 'reduit') {
         reduire();
     } else {
         agrandir();

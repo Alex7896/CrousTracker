@@ -9,7 +9,7 @@
                 <input type="text" placeholder="Identifiant" name="login" required>
                 <input type="password" placeholder="Mot de passe" name="mdp" required>
                 <input type="submit" value="Se connecter">
-                <button onclick="updateUrlParam('action','inscription')">S'inscire</button>
+                <button onclick="updateUrlParam({page:'connexion', action:'inscription'})">S'inscire</button>
             </form>
             {% if erreur is not null %}
                 <div>{{ erreur }}</div>
@@ -18,7 +18,7 @@
         {% else %}
             <div class="login-container">
                 <div class="info-message">Vous êtes déjà connecté</div>
-                <button onclick="updateUrlParam('action','deconnexion')" class="btn-primary">Déconnexion</button>
+                <button onclick="updateUrlParam({page:'connexion', action:'deconnexion'})" class="btn-primary">Déconnexion</button>
             </div>
         {% endif %}
     </main>

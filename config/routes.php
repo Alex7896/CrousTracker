@@ -4,6 +4,7 @@ use App\Controller;
 // Récupérer les paramètres de l'URL
 $page = $_GET['page'] ?? null; // Page active
 $action = $_GET['action'] ?? null;
+$id = $_GET['id'] ?? null;
 
 // Initialisation du contrôleur
 $controller = null;
@@ -31,6 +32,18 @@ switch ($page) {
         $controller = 'ActualiserController';
         $method = 'index';
         break;
+    case 'details':
+        $controller = 'InfoCrousController';
+        $method = 'afficherDetails';
+        break;
+    case 'menu':
+        $controller = 'InfoCrousController';
+        $method = 'afficherMenu';
+        break;
+    case 'avis':
+        $controller = 'InfoCrousController';
+        $method = 'afficherAvis';
+        break;
     default:
         $controller = 'AccueilMapController';
         $method = 'index';
@@ -41,7 +54,11 @@ if ($controller && $method) {
     require_once '../config/database.php'; // Connexion à la base de données
     $controllerClass = 'App\\Controller\\' . $controller;
     $controllerObject = new $controllerClass($pdo);
-    $controllerObject->$method();
+    if(isset($id)) {
+        $controllerObject->$method($id);
+    } else {
+        $controllerObject->$method();
+    }
 } else {
     echo "404 Not Found";
 }
