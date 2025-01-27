@@ -22,7 +22,6 @@ class InfoCrousController extends BaseController
     public function afficherMenu($id) {
         $menu = $this->restaurantModel->getMenu($id);
         $this->renderView('infoCrous/menu.twig', ['menu' => $menu]);
-
     }
 
     public function afficherAvis($id) {

@@ -16,9 +16,12 @@
                 <tr>
                     <td>{{ restaurant.nom }}</td>
                     <td>
+                        {% if restaurant.moyenneAvis is not null %}
                         <!-- Affichage de la moyenne des avis avec des étoiles -->
-                        <div class="Stars" style="--rating: {{ restaurant.moyenneAvis }}" title="Note : {{ restaurant.moyenneAvis }} sur 5">
-                        </div>
+                            <div class="Stars" style="--rating: {{ restaurant.moyenneAvis }}" title="Note : {{ restaurant.moyenneAvis }} sur 5"></div>
+                        {% else %}
+                            <div>Pas de note</div>
+                        {% endif %}
                     </td>
                     <td>
                         <button class="action-btn">
