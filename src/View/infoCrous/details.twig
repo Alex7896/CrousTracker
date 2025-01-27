@@ -1,9 +1,44 @@
 {% extends "includes/base.twig" %}
+
 {% block corps %}
-    <main class="">
+    <main class="restaurant-details">
         {% include "infoCrous/nav.twig" %}
-        <section>
-            <!-- mettre votre page ici -->
+
+        <section class="restaurant-info-container">
+            <h1>{{ restaurant.title }}</h1>
+
+            <div class="restaurant-photo">
+                <img src="{{ restaurant.photo.src }}" alt="{{ restaurant.photo.alt }}">
+            </div>
+
+            <div class="restaurant-details">
+                <p><strong>Type :</strong> {{ restaurant.type }}</p>
+                <p><strong>Localisation :</strong> {{ restaurant.area }}</p>
+                <p><strong>Adresse :</strong> {{ restaurant.address }}</p>
+
+                <p><strong>Accessibilité :</strong> {% if restaurant.accessibility %} Oui {% else %} Non {% endif %}</p>
+                <p><strong>WiFi :</strong> {% if restaurant.wifi %} Disponible {% else %} Non disponible {% endif %}</p>
+
+                <h3>Description</h3>
+                <p>{{ restaurant.description }}</p>
+
+                <h3>Accès</h3>
+                <p>{{ restaurant.access }}</p>
+
+                <h3>Horaires d'ouverture</h3>
+                <p>{{ restaurant.operationalhours|raw }}</p>
+
+                <h3>Contact</h3>
+                <p><strong>Téléphone :</strong> {{ restaurant.contact.phone }}</p>
+                <p><strong>Email :</strong> <a href="mailto:{{ restaurant.contact.email }}">{{ restaurant.contact.email }}</a></p>
+
+                <h3>Moyens de paiement acceptés</h3>
+                <ul>
+                    {% for method in restaurant.payment %}
+                        <li>{{ method }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </section>
     </main>
 {% endblock %}

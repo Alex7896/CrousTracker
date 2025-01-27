@@ -14,9 +14,11 @@ class InfoCrousController extends BaseController
         $this->avisModel = new Avis($pdo);
     }
 
-    public function afficherDetails() { //a rajouter $id en parametre
-        $this->renderView('infoCrous/details.twig');
+    public function afficherDetails($id) {
+        //$this->renderView('details.twig', ['restaurant' =>$this->restaurantModel->getRestaurantDetails($id)]);
+        var_dump($this->restaurantModel->getRestaurantDetails($id));
     }
+
 
     public function afficherMenu($id) {
         $menu = $this->restaurantModel->getMenu($id);
