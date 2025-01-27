@@ -5,11 +5,21 @@
     {% include "infoCrous/nav.twig" %}
     <section class="restaurant-section">
         <button class="toggle-menu-btn">Afficher le menu &#9662;</button>
-        <div class="menu-sections hidden">
-        sqdqsddsqdqqs
+        <div class="menu-sections">
         {% for MenuJour in menu %}
             <h3>Menu du {{ MenuJour.date }}</h3>
-            
+            {% for Dinner in MenuJour.meal %}
+                {% for category in Dinner.foodcategory %}
+                    <div class="menu-section">
+                        <h4>{{ category.name }}</h4>
+                        <ul>
+                            {% for dish in category.dishes %}
+                                <li>{{ dish.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% endfor %}
         {% endfor %}
         </div>
     </section>
