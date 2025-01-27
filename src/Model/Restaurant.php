@@ -58,4 +58,10 @@ class Restaurant
             }
         }
     }
+
+    function getRestaurants() {
+        $stmt = $this->pdo->prepare("SELECT * FROM restaurant");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
