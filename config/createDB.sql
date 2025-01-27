@@ -28,7 +28,7 @@ CREATE TABLE avis (
 CREATE TABLE restaurant (
                             IdRestaurant INT AUTO_INCREMENT PRIMARY KEY,
                             nom VARCHAR(255) NOT NULL,
-                            ville VARCHAR(255) NOT NULL,
+                            adresse VARCHAR(255) NOT NULL,
                             latitude DECIMAL(9, 6) NOT NULL,
                             longitude DECIMAL(9, 6) NOT NULL,
                             urlApi VARCHAR(255),

@@ -4,53 +4,29 @@
 <main>
     {% include "infoCrous/nav.twig" %}
     <section class="restaurant-section">
-    dsqqdsqdqsdsdsdsdqsqds
-        <h2>{{ restaurant.name }}</h2>
         <button class="toggle-menu-btn">Afficher le menu &#9662;</button>
         <div class="menu-sections hidden">
-            <div class="menu-section">
-                <h3>Entrées</h3>
-                <ul>
-                    {% for entree in menu.entrees %}
-                        <li>{{ entree }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Plats</h3>
-                <ul>
-                    {% for plat in menu.plats %}
-                        <li>{{ plat }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Accompagnements</h3>
-                <ul>
-                    {% for accompagnement in menu.accompagnements %}
-                        <li>{{ accompagnement }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Plats Végétariens</h3>
-                <ul>
-                    {% for platVege in menu.platsVege %}
-                        <li>{{ platVege }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="menu-section">
-                <h3>Desserts</h3>
-                <ul>
-                    {% for dessert in menu.desserts %}
-                        <li>{{ dessert }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+        sqdqsddsqdqqs
+        {% for MenuJour in menu %}
+            <h3>Menu du {{ MenuJour.date }}</h3>
+            
+        {% endfor %}
         </div>
     </section>
 </main>
 
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleButton = document.querySelector('.toggle-menu-btn');
+        const menuSections = document.querySelector('.menu-sections');
+        
+        toggleButton.addEventListener('click', () => {
+            menuSections.classList.toggle('hidden');
+            toggleButton.innerHTML = menuSections.classList.contains('hidden') 
+                ? 'Afficher le menu &#9662;' 
+                : 'Masquer le menu &#9652;';
+        });
+    });
+</script>
 
 {% endblock %}
