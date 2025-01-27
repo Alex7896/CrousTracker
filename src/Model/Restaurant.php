@@ -64,4 +64,8 @@ class Restaurant
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    function getMenu() {
+        // TODO modifie ça Quentin
+    }
 }
