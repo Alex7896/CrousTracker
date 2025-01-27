@@ -40,34 +40,88 @@ function updateUrlParam({page, action, id}) {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    var map = L.map('map').setView([45.77866149222399, 4.872053750875164], 15);
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialisation de la carte centrée sur une position par défaut
+    const map = L.map('map').setView([45.77866149222399, 4.872053750875164], 15);
 
-
-    // pour modif l'icon
-    var redIcon = L.icon({
+    // Définir une icône personnalisée pour les marqueurs
+    const redIcon = L.icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
         iconSize: [25, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-        shadowSize: [41, 41]
+        shadowSize: [41, 41],
     });
-    //pour ajouter un ping
-    var marker = L.marker([45.778796, 4.871728],
-        {icon: redIcon}).addTo(map);// là c'est l'adresse du crous la doua mais faudra for le bordel
 
-    //pour ajouter le msg en haut du ping
-    marker.bindPopup("<a href='http://localhost'> world!</a><br>I am a popup.").openPopup();
-
-
+    // Ajouter le fond de carte OpenStreetMap
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(map);
 
+    // Fonction pour récupérer les données des CROUS depuis l'API PHP
+    async function fetchCrousLocations() {
+        try {
+            const response = await fetch('./get_crous_locations.php'); // Adapter l'URL si nécessaire
+            if (!response.ok) {
+                throw new Error("Erreur lors de la récupération des données.");
+            }
 
+            const locations = await response.json();
+            return locations;
+        } catch (error) {
+            console.error("Erreur lors de la récupération des données des CROUS :", error);
+            return [];
+        }
+    }
+
+    // Ajouter les marqueurs sur la carte en fonction des données récupérées
+    async function addCrousMarkers() {
+        const locations = await fetchCrousLocations();
+
+        locations.forEach(location => {
+            const { latitude, longitude, nom, ville, lien } = location;
+
+            // Créer un marqueur pour chaque emplacement
+            const marker = L.marker([latitude, longitude], { icon: redIcon }).addTo(map);
+
+            // Ajouter un popup au marqueur avec des informations dynamiques
+            marker.bindPopup(`
+                <b>${nom}</b><br>
+                Ville : ${ville}<br>
+                <a href="${lien}" target="_blank">Plus d'infos</a>
+            `);
+        });
+    }
+
+    // Appeler la fonction pour ajouter les marqueurs
+    addCrousMarkers();
 });
+
+// Fonctionnalité pour agrandir/réduire la barre latérale
+function agrandir() {
+    document.querySelector(".sidebar-navbar")?.classList.remove("reduit");
+    document.getElementById("icon_droite")?.classList.add("actif");
+    document.getElementById("icon_gauche")?.classList.remove("actif");
+    localStorage.setItem('navBar', 'agrandit');
+}
+
+function reduire() {
+    document.querySelector(".sidebar-navbar")?.classList.add("reduit");
+    document.getElementById("icon_gauche")?.classList.add("actif");
+    document.getElementById("icon_droite")?.classList.remove("actif");
+    localStorage.setItem('navBar', 'reduit');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('navBar') === 'reduit') {
+        reduire();
+    } else {
+        agrandir();
+    }
+});
+
 
 /*document.addEventListener('DOMContentLoaded', () => {
     // Fonction pour mettre à jour le titre de la page en fonction du paramètre 'page'
