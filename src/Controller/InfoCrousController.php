@@ -20,6 +20,7 @@ class InfoCrousController extends BaseController
 
     public function afficherMenu() {
         $this->renderView('infoCrous/menu.twig');
+        // TODO modifie ça Quentin
     }
 
     public function afficherAvis() {
