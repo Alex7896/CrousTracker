@@ -160,6 +160,17 @@ function reduire() {
     document.getElementById("icon_droite")?.classList.remove("actif");
     localStorage.setItem('navBar', 'reduit');
 }
+function HideMenu() {
+    let Button = document.getElementById("Menu");
+    let MenuSection = document.getElementById("menu-sections");
+    Button.addEventListener("click", () => {
+        if(getComputedStyle(MenuSection).display != "none"){
+            MenuSection.style.display = "none";
+        } else {
+        MenuSection.style.display = "block";
+        }
+    })
+}
 
 window.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('navBar') === 'reduit') {
