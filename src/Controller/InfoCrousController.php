@@ -15,14 +15,13 @@ class InfoCrousController extends BaseController
     }
 
     public function afficherDetails($id) {
-        $this->renderView('details.twig', ['restaurant' =>$this->restaurantModel->getRestaurantDetails($id)]);
+        $this->renderView('infoCrous/details.twig', ['restaurant' =>$this->restaurantModel->getRestaurantDetails($id)]);
     }
 
 
     public function afficherMenu($id) {
         $menu = $this->restaurantModel->getMenu($id);
         $this->renderView('infoCrous/menu.twig', ['menu' => $menu]);
-
     }
 
     public function afficherAvis() {

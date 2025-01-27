@@ -1,14 +1,12 @@
 {% extends "includes/base.twig" %}
 
 {% block corps %}
-    <main class="restaurant-details">
-        {% include "infoCrous/nav.twig" %}
+    <main>
+    {% include "infoCrous/nav.twig" %}
 
         <section class="restaurant-info-container">
-            <h1>{{ restaurant.title }}</h1>
-
-            <div class="restaurant-photo">
-                <img src="{{ restaurant.photo.src }}" alt="{{ restaurant.photo.alt }}">
+            <div class="restaurant-photo" style="background-image: url('{{ restaurant.photo.src }}');">
+                <h1>{{ restaurant.title }}</h1>
             </div>
 
             <div class="restaurant-details">
