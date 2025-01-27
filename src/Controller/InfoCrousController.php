@@ -15,7 +15,7 @@ class InfoCrousController extends BaseController
     }
 
     public function afficherDetails($id) {
-        $this->renderView('details.twig', ['restaurant' =>$this->restaurantModel->getRestaurantDetails($id)]);
+        $this->renderView('infoCrous/details.twig', ['restaurant' =>$this->restaurantModel->getRestaurantDetails($id)]);
     }
 
 
@@ -25,7 +25,9 @@ class InfoCrousController extends BaseController
 
     }
 
-    public function afficherAvis() {
-        $this->renderView('infoCrous/avis.twig');
+    public function afficherAvis($id) {
+        $avis = $this->avisModel->getAvis($id);
+        $moyenneAvis = $this->restaurantModel->getMoyenneAvis($id);
+        $this->renderView('infoCrous/avis.twig', ['avis' => $avis, 'moyenneAvis' => $moyenneAvis]);
     }
 }

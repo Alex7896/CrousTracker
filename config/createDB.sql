@@ -19,7 +19,7 @@ CREATE TABLE avis (
                       date_publication DATE NOT NULL,         -- Date de publication de l'avis
                       IdUser INT NOT NULL,                    -- Référence à l'utilisateur qui a publié l'avis
                       IdRestaurant INT NOT NULL,
-                      Note INT CHECK (Note BETWEEN 1 AND 5),  -- Note entre 1 et 5
+                      Note DECIMAL(3, 2) CHECK (Note BETWEEN 1 AND 5),  -- Note entre 1 et 5
                       Commentaire TEXT,                       -- Contenu du commentaire
                       FOREIGN KEY (IdUser) REFERENCES User(IdUser) ON DELETE CASCADE -- Relation avec la table User
 );
@@ -27,11 +27,12 @@ CREATE TABLE avis (
 -- Création de la table restaurant
 CREATE TABLE restaurant (
                             IdRestaurant INT AUTO_INCREMENT PRIMARY KEY,
+                            type VARCHAR(255) NOT NULL,
                             nom VARCHAR(255) NOT NULL,
                             adresse VARCHAR(255) NOT NULL,
                             latitude DECIMAL(9, 6) NOT NULL,
                             longitude DECIMAL(9, 6) NOT NULL,
-                            urlApi VARCHAR(255),
+                            urlApi VARCHAR(255) NOT NULL,
                             moyenneAvis DECIMAL(3, 2)
 );
 

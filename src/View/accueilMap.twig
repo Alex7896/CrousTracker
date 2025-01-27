@@ -1,7 +1,6 @@
 {% extends "includes/base.twig" %}
 {% block corps %}
     <div id="map" style="height: 100%; width: 100%"></div>
-
     <script>
         var map = L.map('map').setView([45.77866149222399, 4.872053750875164], 15);
 
@@ -12,25 +11,45 @@
 
 
         // pour modif l'icon
-        var redIcon = L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
+        var cafetIcon = L.icon({
+            iconUrl: 'icons/icone1.png',
+            iconSize: [39, 54],
+            iconAnchor: [20, 40],
             popupAnchor: [1, -34],
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-            shadowSize: [41, 41]
+            shadowSize: [54, 54]
+        });
+
+        var restoIcon = L.icon({
+            iconUrl: 'icons/icone2.png',
+            iconSize: [39, 54],
+            iconAnchor: [20, 40],
+            popupAnchor: [1, -34],
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+            shadowSize: [54, 54]
         });
 
         const restaurants = {{ restaurants|json_encode|raw }};
 
         restaurants.forEach(restaurant => {
             if (restaurant.latitude && restaurant.longitude) {
-                const marker = L.marker([restaurant.latitude, restaurant.longitude], {icon: redIcon}).addTo(map);
+                const marker = L.marker([restaurant.latitude, restaurant.longitude], {icon: cafetIcon}).addTo(map);
 
                 marker.bindPopup(`
-                <b>${restaurant.nom}</b><br>
-                ${restaurant.adresse}<br>
-                <a href="?page=details&id=${restaurant.IdRestaurant}">Plus d'infos</a>`);
+                <b>${restaurant.nom} ${restaurant.moyenneAvis ? restaurant.moyenneAvis + ' / 5' : ''}</b><br>
+                ${restaurant.adresse}<br>`);
+
+                marker.on('mouseover', function () {
+                        marker.openPopup(); // Show popup on hover
+                });
+
+                marker.on('mouseout', function () {
+                        marker.closePopup(); // Hide popup when mouse leaves
+                });
+
+                marker.on('click', function () {
+                    updateUrlParam({page: 'details', id: restaurant.IdRestaurant});
+                });
             }
         })
     </script>

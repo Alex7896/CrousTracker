@@ -45,7 +45,7 @@ class Restaurant
             "http://webservices-v2.crous-mobile.fr/feed/versailles/externe/crous-versailles.min.json"
         ];
 
-        $stmt = $this->pdo->prepare("INSERT INTO restaurant(idRestaurant, nom, adresse, latitude, longitude, urlApi) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nom = ?, adresse = ?, latitude = ?, longitude = ?, urlApi = ?");
+        $stmt = $this->pdo->prepare("INSERT INTO restaurant(idRestaurant, type, nom, adresse, latitude, longitude, urlApi) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE type = ?, nom = ?, adresse = ?, latitude = ?, longitude = ?, urlApi = ?");
         foreach ($urls as $url) {
             $response = file_get_contents($url);
             $response = preg_replace('/[\x00-\x1F\x7F]/', '', $response);
@@ -53,7 +53,7 @@ class Restaurant
                 $jsonData = json_decode($response);
 
                 foreach ($jsonData->restaurants as $json) {
-                    $stmt->execute([$json->id, $json->title, $json->adresse, $json->lat, $json->lon, $url, $json->title, $json->adresse, $json->lat, $json->lon, $url]);
+                    $stmt->execute([$json->id, $json->type, $json->title, $json->adresse, $json->lat, $json->lon, $url, $json->type, $json->title, $json->adresse, $json->lat, $json->lon, $url]);
                 }
             }
         }
@@ -97,7 +97,7 @@ class Restaurant
             $jsonData = json_decode($response);
 
             foreach ($jsonData->restaurants as $restaurant) {
-                if ($restaurant->id === $id) {
+                if ($restaurant->id == $id) {
                     return [
                         'title' => $restaurant->title,
                         'area' => $restaurant->area,
@@ -128,6 +128,11 @@ class Restaurant
         return [];
     }
 
-
+    function getMoyenneAvis($id)
+    {
+        $stmt = $this->pdo->prepare("SELECT moyenneAvis FROM restaurant WHERE IdRestaurant = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch()['moyenneAvis'];
+    }
 
 }

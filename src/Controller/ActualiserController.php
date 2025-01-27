@@ -16,6 +16,7 @@ class ActualiserController
     public function index()
     {
         $this->restaurantModel->reload();
+        header('Location: ');
         //$command = 'python test.py';
         //exec($command, $out, $status);
         //var_dump($out);

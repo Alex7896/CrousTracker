@@ -3,6 +3,12 @@
     <main class="">
         {% include "infoCrous/nav.twig" %}
         <section class="center">
+            {{ moyenneAvis }}
+
+
+
+
+
 
             <!-- ceci est temporaire -->
             <div class="llm-container">
@@ -10,7 +16,6 @@
                 <button id="submit" onclick="callLLM()">Soumettre</button>
                 <textarea id="output" readonly></textarea>
             </div>
-
         </section>
     </main>
 {% endblock %}
