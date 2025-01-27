@@ -77,7 +77,7 @@ class Restaurant
             $jsonData = json_decode($response);
 
             foreach ($jsonData->restaurants as $restaurant) {
-                if ($restaurant->id === $id) {
+                if ($restaurant->id == $id) {
                     return $restaurant->menus;
                 }
             }
