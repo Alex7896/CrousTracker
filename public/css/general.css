@@ -24,3 +24,100 @@ main {
 section {
     width: 100%;
 }
+.classement-container {
+    max-width: 100%; /* Prend toute la largeur disponible */
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 20px;
+    margin: 0; /* Supprime le centrage */
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.classement-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+    width: 100%;
+}
+
+.classement-table {
+    width: 100%; /* Le tableau occupe toute la largeur disponible */
+    margin: 0;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.classement-table th, .classement-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center; /* Centre le contenu des colonnes */
+}
+
+.classement-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.classement-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.classement-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+.action-btn:hover {
+    background-color: #ff5722; /* Couleur vive au survol */
+    color: #fff; /* Contraste avec la couleur de fond */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Animation fluide */
+}
+
+/* Styles pour les étoiles */
+.Stars {
+    --percent: calc(var(--rating) / 5 * 100%);
+    display: inline-block;
+    font-size: 30px;
+    font-family: Times; /* Assure que les étoiles s'affichent correctement */
+    line-height: 1;
+}
+
+.Stars::before {
+    content: '★★★★★';
+    letter-spacing: 3px;
+    background: linear-gradient(90deg, #ffcc0f var(--percent), #ddd var(--percent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Progress bar */
+.progress-bar-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    height: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50; /* Couleur de la barre (vert) */
+    border-radius: 10px;
+}
