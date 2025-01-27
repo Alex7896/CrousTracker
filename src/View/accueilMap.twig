@@ -1,19 +1,8 @@
 {% extends "includes/base.twig" %}
 {% block corps %}
-    <div id="map" style="height: 100%"></div>
+    <div id="map" style="height: 100%; width: 100%"></div>
 
     <script>
-        let locations = [
-            {
-                latitude: 40.74,
-                longitude: -73.95
-            },
-            {
-                latitude: 40,
-                longitude: -73
-            }
-        ];
-
         var map = L.map('map').setView([45.77866149222399, 4.872053750875164], 15);
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -31,19 +20,18 @@
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
             shadowSize: [41, 41]
         });
-        //pour ajouter un ping
-        var marker = L.marker([45.778796, 4.871728],
-            {icon: redIcon}).addTo(map);// là c'est l'adresse du crous la doua mais faudra for le bordel
 
-        //pour ajouter le msg en haut du ping
-        marker.bindPopup("<a href='http://localhost'> world!</a><br>I am a popup.").openPopup();
+        const restaurants = {{ restaurants|json_encode|raw }};
 
+        restaurants.forEach(restaurant => {
+            if (restaurant.latitude && restaurant.longitude) {
+                const marker = L.marker([restaurant.latitude, restaurant.longitude], {icon: redIcon}).addTo(map);
 
-        // Loop through locations and add markers
-        locations.forEach(function(location) {
-            if (location.latitude && location.longitude) {
-                addMarker(location.latitude, location.longitude);
+                marker.bindPopup(`
+                <b>${restaurant.nom}</b><br>
+                ${restaurant.adresse}<br>
+                <a href="?page=details&id=${restaurant.IdRestaurant}">Plus d'infos</a>`);
             }
-        });
+        })
     </script>
 {% endblock %}

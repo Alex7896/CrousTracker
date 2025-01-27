@@ -45,7 +45,7 @@ class Restaurant
             "http://webservices-v2.crous-mobile.fr/feed/versailles/externe/crous-versailles.min.json"
         ];
 
-        $stmt = $this->pdo->prepare("INSERT INTO restaurant(idRestaurant, nom, ville, latitude, longitude, urlApi) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nom = ?, ville = ?, latitude = ?, longitude = ?, urlApi = ?");
+        $stmt = $this->pdo->prepare("INSERT INTO restaurant(idRestaurant, nom, adresse, latitude, longitude, urlApi) VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE nom = ?, adresse = ?, latitude = ?, longitude = ?, urlApi = ?");
         foreach ($urls as $url) {
             $response = file_get_contents($url);
             $response = preg_replace('/[\x00-\x1F\x7F]/', '', $response);
@@ -64,4 +64,70 @@ class Restaurant
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    function getMenu($id) {
+        $stmt = $this->pdo->prepare("SELECT urlApi FROM restaurant WHERE idRestaurant = ?");
+        $stmt->execute([$id]);
+        $url = $stmt->fetch()['urlApi'];
+
+        $response = file_get_contents($url);
+        $response = preg_replace('/[\x00-\x1F\x7F]/', '', $response);
+
+        if ($response !== false) {
+            $jsonData = json_decode($response);
+
+            foreach ($jsonData->restaurants as $restaurant) {
+                if ($restaurant->id == $id) {
+                    return $restaurant->menus;
+                }
+            }
+        }
+        return [];
+    }
+
+    function getRestaurantDetails($id) {
+        $stmt = $this->pdo->prepare("SELECT urlApi FROM restaurant WHERE idRestaurant = ?");
+        $stmt->execute([$id]);
+        $url = $stmt->fetch()['urlApi'];
+
+        $response = file_get_contents($url);
+        $response = preg_replace('/[\x00-\x1F\x7F]/', '', $response);
+
+        if ($response !== false) {
+            $jsonData = json_decode($response);
+
+            foreach ($jsonData->restaurants as $restaurant) {
+                if ($restaurant->id === $id) {
+                    return [
+                        'title' => $restaurant->title,
+                        'area' => $restaurant->area,
+                        'address' => $restaurant->adresse,
+                        'type' => $restaurant->type,
+                        'accessibility' => $restaurant->accessibility,
+                        'wifi' => $restaurant->wifi,
+                        'description' => $restaurant->description,
+                        'access' => $restaurant->access,
+                        'operationalhours' => $restaurant->operationalhours,
+                        'contact' => [
+                            'phone' => $restaurant->contact->tel, // Téléphone
+                            'email' => $restaurant->contact->email // Email
+                        ],
+                        'payment' => array_map(function($payment) {
+                            return $payment->name; // Liste des moyens de paiement
+                        }, $restaurant->payment),
+                        'photo' => [
+                            'src' => $restaurant->photo->src, // Lien vers la photo
+                            'alt' => $restaurant->photo->alt  // Texte alternatif de la photo
+                        ]
+                    ];
+                }
+            }
+        }
+
+
+        return [];
+    }
+
+
+
 }

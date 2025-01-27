@@ -1,9 +1,18 @@
 <?php
 namespace App\Controller;
 
+use App\Model\Restaurant;
+
 class ClassementController extends BaseController
 {
-    public function index() {
-        header('Location: index.php?page=details'); // TODO a supprimer plus tard
+    private $restaurantModel;
+
+    public function __construct($pdo){
+        $this->restaurantModel = new Restaurant($pdo);
     }
+    public function index() {
+        $this->renderView('classement.twig',['restaurants'=>$this->restaurantModel->getRestaurants()]);
+    }
+
+
 }

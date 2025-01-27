@@ -78,21 +78,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Ajouter les marqueurs sur la carte en fonction des données récupérées
     async function addCrousMarkers() {
-        const locations = await fetchCrousLocations();
 
-        locations.forEach(location => {
-            const { latitude, longitude, nom, ville, lien } = location;
-
-            // Créer un marqueur pour chaque emplacement
-            const marker = L.marker([latitude, longitude], { icon: redIcon }).addTo(map);
-
-            // Ajouter un popup au marqueur avec des informations dynamiques
-            marker.bindPopup(`
-                <b>${nom}</b><br>
-                Ville : ${ville}<br>
-                <a href="${lien}" target="_blank">Plus d'infos</a>
-            `);
-        });
     }
 
     // Appeler la fonction pour ajouter les marqueurs
