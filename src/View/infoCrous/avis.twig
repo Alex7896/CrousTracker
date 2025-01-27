@@ -1,21 +1,21 @@
 {% extends "includes/base.twig" %}
 {% block corps %}
-    <main class="">
+    <main>
         {% include "infoCrous/nav.twig" %}
-        <section class="center">
-            {{ moyenneAvis }}
-
-
-
-
-
-
-            <!-- ceci est temporaire -->
-            <div class="llm-container">
-                <input type="text" name="input" id="input" placeholder="Parle avec une IA">
-                <button id="submit" onclick="callLLM()">Soumettre</button>
-                <textarea id="output" readonly></textarea>
-            </div>
+        <section class="reviews-container">
+            <div class="Stars" style="--rating: {{ moyenneAvis }}" title="Note : {{ moyenneAvis }} sur 5"></div>
+            {% for a in avis %}
+                <div class="review-card">
+                    <div class="review-header">
+                        <h2 class="user-name">{{ a.prenom }} {{ a.nom }}</h2>
+                        <div class="star-rating">
+                            <div class="Stars" style="--rating: {{ a.Note }}" title="Note : {{ a.Note }} sur 5"></div>
+                        </div>
+                    </div>
+                    <p class="review-text">{{ a.Commentaire }}</p>
+                    <span class="review-date">Publié le {{ a.date_publication|date('d M Y') }}</span>
+                </div>
+            {% endfor %}
         </section>
     </main>
 {% endblock %}

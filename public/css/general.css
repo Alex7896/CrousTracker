@@ -108,18 +108,4 @@ section {
     -webkit-text-fill-color: transparent;
 }
 
-/* Progress bar */
-.progress-bar-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 10px;
-    height: 10px;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: #4caf50; /* Couleur de la barre (vert) */
-    border-radius: 10px;
-}
-
 

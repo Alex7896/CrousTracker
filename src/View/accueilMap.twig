@@ -33,10 +33,10 @@
 
         restaurants.forEach(restaurant => {
             if (restaurant.latitude && restaurant.longitude) {
-                const marker = L.marker([restaurant.latitude, restaurant.longitude], {icon: cafetIcon}).addTo(map);
+                const marker = L.marker([restaurant.latitude, restaurant.longitude], {icon: restaurant.type.includes('Cafétéria') ? cafetIcon : restoIcon}).addTo(map);
 
                 marker.bindPopup(`
-                <b>${restaurant.nom} ${restaurant.moyenneAvis ? restaurant.moyenneAvis + ' / 5' : ''}</b><br>
+                <b>${restaurant.nom} <span style="color: #4caf50">${restaurant.moyenneAvis ? restaurant.moyenneAvis + ' / 5' : ''}</span></b><br>
                 ${restaurant.adresse}<br>`);
 
                 marker.on('mouseover', function () {

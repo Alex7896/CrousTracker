@@ -60,7 +60,7 @@ class Restaurant
     }
 
     function getRestaurants() {
-        $stmt = $this->pdo->prepare("SELECT * FROM restaurant");
+        $stmt = $this->pdo->prepare("SELECT * FROM restaurant ORDER BY moyenneAvis DESC");
         $stmt->execute();
         return $stmt->fetchAll();
     }

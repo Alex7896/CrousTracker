@@ -19,8 +19,8 @@ CREATE TABLE avis (
                       date_publication DATE NOT NULL,         -- Date de publication de l'avis
                       IdUser INT NOT NULL,                    -- Référence à l'utilisateur qui a publié l'avis
                       IdRestaurant INT NOT NULL,
-                      Note DECIMAL(3, 2) CHECK (Note BETWEEN 1 AND 5),  -- Note entre 1 et 5
-                      Commentaire TEXT,                       -- Contenu du commentaire
+                      note DECIMAL(3, 2) CHECK (Note BETWEEN 1 AND 5),  -- Note entre 1 et 5
+                      commentaire TEXT,                       -- Contenu du commentaire
                       FOREIGN KEY (IdUser) REFERENCES User(IdUser) ON DELETE CASCADE -- Relation avec la table User
 );
 

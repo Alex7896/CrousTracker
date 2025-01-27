@@ -12,7 +12,7 @@ class Avis
     }
 
     public function getAvis($id) {
-        $stmt = $this->pdo->prepare("SELECT * FROM avis WHERE IdRestaurant = ? ORDER BY date_publication DESC");
+        $stmt = $this->pdo->prepare("SELECT a.*, u.nom, u.prenom FROM avis a JOIN user u ON a.IdUser = u.IdUser WHERE IdRestaurant = ? ORDER BY date_publication DESC");
         $stmt->execute([$id]);
         return $stmt->fetchAll();
     }

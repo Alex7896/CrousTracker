@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Model\Avis;
 use App\Model\Restaurant;
+use App\Model\User;
 
 class InfoCrousController extends BaseController
 {
@@ -26,6 +27,7 @@ class InfoCrousController extends BaseController
 
     public function afficherAvis($id) {
         $avis = $this->avisModel->getAvis($id);
+
         $moyenneAvis = $this->restaurantModel->getMoyenneAvis($id);
         $this->renderView('infoCrous/avis.twig', ['avis' => $avis, 'moyenneAvis' => $moyenneAvis]);
     }
