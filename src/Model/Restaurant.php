@@ -65,7 +65,23 @@ class Restaurant
         return $stmt->fetchAll();
     }
 
-    function getMenu() {
-        // TODO modifie ça Quentin
+    function getMenu($id) {
+        $stmt = $this->pdo->prepare("SELECT urlApi FROM restaurant WHERE idRestaurant = ?");
+        $stmt->execute([$id]);
+        $url = $stmt->fetch()['urlApi'];
+
+        $response = file_get_contents($url);
+        $response = preg_replace('/[\x00-\x1F\x7F]/', '', $response);
+
+        if ($response !== false) {
+            $jsonData = json_decode($response);
+
+            foreach ($jsonData->restaurants as $restaurant) {
+                if ($restaurant->id === $id) {
+                    return $restaurant->menus;
+                }
+            }
+        }
+        return [];
     }
 }
