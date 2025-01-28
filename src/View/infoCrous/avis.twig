@@ -1,6 +1,6 @@
 {% extends "includes/base.twig" %}
 {% block corps %}
-    <main>
+    <div class="main">
         {% include "infoCrous/nav.twig" %}
         <section class="reviews-container">
             <div class="Stars" style="--rating: {{ moyenneAvis }}" title="Note : {{ moyenneAvis }} sur 5"></div>
@@ -17,5 +17,5 @@
                 </div>
             {% endfor %}
         </section>
-    </main>
+    </div>
 {% endblock %}

@@ -5,6 +5,11 @@ header {
     justify-content: space-between;
     background-color: #E0E0E0;
     top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
     padding: 5px 20px;
     box-shadow: 0 3px 6px red;
     z-index: 1000;  /*superposition*/
@@ -42,6 +47,7 @@ header {
     display: flex;
     gap: 15px;
     align-items: center;
+    padding-right: 30px;
 }
 
 /* Nav button styling */

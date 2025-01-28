@@ -1,7 +1,7 @@
 {% extends "includes/base.twig" %}
 
 {% block corps %}
-    <main class="center">
+    <div class="main center">
         {% if not isLogged %}
         <div class="login-container">
             <h2>Connexion</h2>
@@ -21,6 +21,6 @@
                 <button onclick="updateUrlParam({page:'connexion', action:'deconnexion'})" class="btn-primary">Déconnexion</button>
             </div>
         {% endif %}
-    </main>
+    </div>
 {% endblock %}
 

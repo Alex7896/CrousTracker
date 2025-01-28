@@ -1,9 +1,13 @@
+/* Conteneur principal pour tout aligner */
+.layout {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
 /* Barre de la sidebar */
 .sidebar-navbar {
     position: sticky;
-    top: 0;
-    left: 0;
-    bottom: 0;
     width: 250px;
     background-color: #E0E0E0;
     box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.2);
@@ -12,6 +16,13 @@
     padding: 10px;
     z-index: 999;
     transition: all 0.3s ease;
+    height: 100%;
+    max-height: 100%;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    justify-content: space-between;
+
 }
 
 /* Liste des items de la sidebar */
@@ -19,7 +30,6 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    flex-grow: 1;
 }
 
 .sidebar-navbar-item {
@@ -67,16 +77,9 @@
 }
 
 /* Toggle pour rétrécir ou agrandir la sidebar */
-.sidebar-navbar-toggle {
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    z-index: 100;
-    width: 100%;
+.sidebar-navbar-toggle{
+    margin-bottom: 30px;
+
 }
 
 /* Style des boutons de réduction/agrandissement */
@@ -95,6 +98,7 @@
     width: 80%;
     height: 45px;
     display: none;
+
 }
 
 .reduit .toggle-button {

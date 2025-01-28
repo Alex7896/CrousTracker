@@ -1,7 +1,7 @@
 {% extends "includes/base.twig" %}
 
 {% block corps %}
-<main>
+<div class="main">
     {% include "infoCrous/nav.twig" %}
     <section class="restaurant-section">
         {% for MenuJour in menu %}
@@ -26,7 +26,7 @@
         </div>
         {% endfor %}
     </section>
-</main>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -54,6 +54,7 @@
     .hidden {
         display: none;
     }
+
 </style>
 
 {% endblock %}
