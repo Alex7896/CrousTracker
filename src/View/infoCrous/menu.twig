@@ -26,6 +26,15 @@
             const menuTitle = document.getElementById('menu-title');
 
             function renderMenu(index) {
+                if (menus.length === 0) {
+                    // Si le tableau est vide
+                    menuTitle.textContent = "Aucun menu disponible pour le moment.";
+                    menuContent.innerHTML = "<p>Revenez plus tard pour découvrir nos menus !</p>";
+                    prevBtn.disabled = true;
+                    nextBtn.disabled = true;
+                    return;
+                }
+
                 const menu = menus[index];
                 menuTitle.textContent = `Menu du jour ${menu.date}`;
                 let html = '';
@@ -62,6 +71,7 @@
 
             renderMenu(currentIndex);
         });
+
     </script>
 
     <style>
