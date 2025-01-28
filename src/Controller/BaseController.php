@@ -11,6 +11,7 @@ class BaseController
         }
         if (isset($_SESSION['isLogged'])) {
             $data['isLogged'] = $_SESSION['isLogged'];
+            $data['IdUser'] = $_SESSION['IdUser'];
         }
 
         $loader = new \Twig\Loader\FilesystemLoader('../src/View');

@@ -16,7 +16,7 @@ CREATE TABLE user (
 -- Création de la table avis
 CREATE TABLE avis (
                       IdAvis INT AUTO_INCREMENT PRIMARY KEY,  -- Identifiant unique pour chaque avis
-                      date_publication DATE NOT NULL,         -- Date de publication de l'avis
+                      date_publication DATETIME NOT NULL,         -- Date de publication de l'avis
                       IdUser INT NOT NULL,                    -- Référence à l'utilisateur qui a publié l'avis
                       IdRestaurant INT NOT NULL,
                       note DECIMAL(3, 2) CHECK (Note BETWEEN 1 AND 5),  -- Note entre 1 et 5

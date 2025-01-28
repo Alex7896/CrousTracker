@@ -16,4 +16,11 @@ class Avis
         $stmt->execute([$id]);
         return $stmt->fetchAll();
     }
+
+    public function ajouterAvis($IdUser, $note, $comment, $id) {
+        $stmt = $this->pdo->prepare("
+        INSERT INTO avis (IdUser, Note, Commentaire, IdRestaurant, date_publication) 
+        VALUES (?, ?, ?, ?, NOW())");
+        $stmt->execute([$IdUser, $note, $comment, $id]);
+    }
 }

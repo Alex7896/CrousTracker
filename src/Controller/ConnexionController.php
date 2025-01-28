@@ -17,9 +17,12 @@ class ConnexionController extends BaseController
             $login = $_POST['login'];
             $mdp = $_POST['mdp'];
 
-            if($this->userModel->checkUser($login, $mdp)){
+            $IdUser = $this->userModel->checkUser($login, $mdp);
+
+            if($IdUser){
                 session_start();
                 $_SESSION['isLogged'] = true;
+                $_SESSION['IdUser'] = $IdUser;
                 header('Location: index.php?page=accueil');
                 exit();
             } else {
@@ -38,9 +41,11 @@ class ConnexionController extends BaseController
             $prenom = $_POST['prenom'];
             $nom = $_POST['nom'];
 
-            $this->userModel->addUser($login, $mdp, $prenom, $nom);
+            $IdUser = $this->userModel->addUser($login, $mdp, $prenom, $nom);
+
             session_start();
             $_SESSION['isLogged'] = true;
+            $_SESSION['IdUser'] = $IdUser;
 
             header('Location: index.php?page=accueil');
         } else {
@@ -52,6 +57,7 @@ class ConnexionController extends BaseController
     {
         session_start();
         $_SESSION['isLogged'] = false;
+        $_SESSION['IdUser'] = null;
         header('Location: index.php?page=connexion');
     }
 }

@@ -42,7 +42,14 @@ switch ($page) {
         break;
     case 'avis':
         $controller = 'InfoCrousController';
-        $method = 'afficherAvis';
+        switch ($action) {
+            case 'ajouter':
+                $method = 'ajouterAvis';
+                break;
+            default:
+                $method = 'afficherAvis';
+                break;
+        }
         break;
     default:
         $controller = 'AccueilMapController';

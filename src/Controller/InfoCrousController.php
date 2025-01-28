@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Model\Avis;
@@ -10,22 +11,39 @@ class InfoCrousController extends BaseController
     private $restaurantModel;
     private $avisModel;
 
-    public function __construct($pdo) {
+    public function __construct($pdo)
+    {
         $this->restaurantModel = new Restaurant($pdo);
         $this->avisModel = new Avis($pdo);
     }
 
-    public function afficherDetails($id) {
-        $this->renderView('infoCrous/details.twig', ['restaurant' =>$this->restaurantModel->getRestaurantDetails($id)]);
+    public function afficherDetails($id)
+    {
+        $this->renderView('infoCrous/details.twig', ['restaurant' => $this->restaurantModel->getRestaurantDetails($id)]);
+    }
+
+    public function ajouterAvis($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $IdUser = $_POST['IdUser'];
+            $note = $_POST['note'];
+            $comment = $_POST['comment'];
+
+            $this->avisModel->ajouterAvis($IdUser, $note, $comment, $id);
+        }
+
+        header('Location: index.php?page=avis&id=' . $id);
     }
 
 
-    public function afficherMenu($id) {
+    public function afficherMenu($id)
+    {
         $menu = $this->restaurantModel->getMenu($id);
         $this->renderView('infoCrous/menu.twig', ['menu' => $menu]);
     }
 
-    public function afficherAvis($id) {
+    public function afficherAvis($id)
+    {
         $avis = $this->avisModel->getAvis($id);
 
         $moyenneAvis = $this->restaurantModel->getMoyenneAvis($id);

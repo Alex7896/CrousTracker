@@ -1,11 +1,15 @@
 /* Conteneur des avis */
 .reviews-container {
+    padding: 20px;
+    min-width: 60px;
+    padding-inline: 20%;
+    margin: 20px auto;
+}
+
+.reviews-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 20px;
-    max-width: 800px;
-    margin: 20px auto;
 }
 
 /* Carte d'avis */
@@ -53,4 +57,108 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.add-review-button-container {
+    text-align: center;
+}
+
+
+/* Bouton Ajouter un avis */
+.add-review-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espace entre l'icône et le texte */
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border: none;
+    border-radius: 50px;
+    width: 250px;
+    font-size: 1.2rem;
+    color: red;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-review-button:hover {
+    background-color: #ea3814;
+    color: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Icône du bouton Ajouter un avis */
+.add-icon {
+    width: 20px;
+    height: 20px;
+    transition: filter 0.3s ease;
+}
+
+.add-review-button:hover .add-icon {
+    filter: invert(1);
+}
+
+
+
+
+/* Conteneur du formulaire */
+.review-form-container {
+    background-color: #f9f9f9;
+    padding: 0 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    overflow: hidden; /* Empêche le contenu de déborder */
+    max-height: 0; /* Cache le formulaire initialement */
+    transition: max-height 1.0s ease; /* Transition fluide */
+}
+
+.review-form-container.show {
+    max-height: 500px; /* Ajustez en fonction de la hauteur totale du formulaire */
+}
+
+/* Formulaire */
+#review-form h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #28a745;
+}
+
+#review-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#review-form select,
+#review-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    resize: none;
+}
+
+.submit-button {
+    margin-left: 40%;
+    margin-right: 40%;
+    margin-bottom: 20px;
+    background-color: #28a745;
+    color: white;
+    width: 20%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #218838;
 }
