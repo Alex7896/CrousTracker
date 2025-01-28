@@ -165,5 +165,13 @@ hr {
 .nav-arrow:disabled {
     opacity: 0.3;
     cursor: default;
+}
 
+#menu-title {
+    color: white;
+    background-color: red;
+    border-radius: 15px;
+    width: 300px;
+    padding: 10px;
+    margin: 15px auto 0;
 }

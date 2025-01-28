@@ -1,12 +1,11 @@
 {% extends "includes/base.twig" %}
-
 {% block corps %}
     <div class="main">
         {% include "infoCrous/nav.twig" %}
         <section class="restaurant-section">
             <h2 id="menu-title"></h2>
-            <div class="menu-container" >
-                <button id="prev-day" class="nav-arrow" disabled> &#9204;</button>
+            <div class="menu-container">
+                <button id="prev-day" class="nav-arrow" disabled>&#9204;</button>
                 <div id="menu-content">
                     <!-- Le menu du jour s'affichera ici -->
                 </div>
@@ -71,10 +70,5 @@
 
             renderMenu(currentIndex);
         });
-
     </script>
-
-    <style>
-
-    </style>
 {% endblock %}
