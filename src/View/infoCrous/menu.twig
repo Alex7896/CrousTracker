@@ -1,60 +1,80 @@
 {% extends "includes/base.twig" %}
 
 {% block corps %}
-<div class="main">
-    {% include "infoCrous/nav.twig" %}
-    <section class="restaurant-section">
-        {% for MenuJour in menu %}
-        <div class = "menu-container">
-            <h3>
-                <button class = "toggle-menu-btn">Menu du {{ MenuJour.date }} &#9662;</button>
-            </h3>
-            <div class = "menu-sections hidden">
-                {% for Dinner in MenuJour.meal %}
-                    {% for category in Dinner.foodcategory %}
-                    <div class="menu-section">
-                        <h4>{{ category.name }}</h4>
-                        <ul>
-                            {% for dish in category.dishes %}
-                                <li>{{ dish.name }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endfor %}
-                {% endfor %}
+    <div class="main">
+        {% include "infoCrous/nav.twig" %}
+        <section class="restaurant-section">
+            <h2 id="menu-title"></h2>
+            <div class="menu-container" >
+                <button id="prev-day" class="nav-arrow" disabled> &#9204;</button>
+                <div id="menu-content">
+                    <!-- Le menu du jour s'affichera ici -->
+                </div>
+                <button id="next-day" class="nav-arrow">&#9205;</button>
             </div>
-        </div>
-        {% endfor %}
-    </section>
-</div>
+        </section>
+    </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Sélectionne tous les boutons "Menu du ..."
-        const toggleButtons = document.querySelectorAll('.toggle-menu-btn');
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menus = {{ menu|json_encode|raw }};
+            let currentIndex = 0;
 
-        toggleButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Trouve la section "menu-sections" associée à ce bouton
-                const menuSections = button.closest('.menu-container').querySelector('.menu-sections');
-                // Bascule l'affichage de la section
-                menuSections.classList.toggle('hidden');
-                // Change le texte et la flèche du bouton
-                if (menuSections.classList.contains('hidden')) {
-                    button.innerHTML = `Menu du ${button.textContent.split(' ')[2]} &#9662;`; // Flèche vers le bas
-                } else {
-                    button.innerHTML = `Menu du ${button.textContent.split(' ')[2]} &#9652;`; // Flèche vers le haut
+            const prevBtn = document.getElementById('prev-day');
+            const nextBtn = document.getElementById('next-day');
+            const menuContent = document.getElementById('menu-content');
+            const menuTitle = document.getElementById('menu-title');
+
+            function renderMenu(index) {
+                if (menus.length === 0) {
+                    // Si le tableau est vide
+                    menuTitle.textContent = "Aucun menu disponible pour le moment.";
+                    menuContent.innerHTML = "<p>Revenez plus tard pour découvrir nos menus !</p>";
+                    prevBtn.disabled = true;
+                    nextBtn.disabled = true;
+                    return;
+                }
+
+                const menu = menus[index];
+                menuTitle.textContent = `Menu du jour ${menu.date}`;
+                let html = '';
+
+                menu.meal.forEach(meal => {
+                    html += `<h3>${meal.name}</h3>`;
+                    meal.foodcategory.forEach(category => {
+                        html += `<h4>${category.name}</h4><ul style='list-style-type: none; padding: 0;'>`;
+                        category.dishes.forEach(dish => {
+                            html += `<li>${dish.name}</li>`;
+                        });
+                        html += '</ul>';
+                    });
+                });
+                menuContent.innerHTML = html;
+
+                prevBtn.disabled = index === 0;
+                nextBtn.disabled = index === menus.length - 1;
+            }
+
+            prevBtn.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    renderMenu(currentIndex);
                 }
             });
+
+            nextBtn.addEventListener('click', () => {
+                if (currentIndex < menus.length - 1) {
+                    currentIndex++;
+                    renderMenu(currentIndex);
+                }
+            });
+
+            renderMenu(currentIndex);
         });
-    });
-</script>
 
-<style>
-    .hidden {
-        display: none;
-    }
+    </script>
 
-</style>
+    <style>
 
+    </style>
 {% endblock %}
