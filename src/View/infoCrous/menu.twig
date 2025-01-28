@@ -5,41 +5,55 @@
     {% include "infoCrous/nav.twig" %}
     <section class="restaurant-section">
         {% for MenuJour in menu %}
-            <h3><button class = "Menu">Menu du {{ MenuJour.date }} &#9662;</button></h3>
-            <div class = "menu-sections">
+        <div class = "menu-container">
+            <h3>
+                <button class = "toggle-menu-btn">Menu du {{ MenuJour.date }} &#9662;</button>
+            </h3>
+            <div class = "menu-sections hidden">
                 {% for Dinner in MenuJour.meal %}
                     {% for category in Dinner.foodcategory %}
+                    <div class="menu-section">
                         <h4>{{ category.name }}</h4>
                         <ul>
                             {% for dish in category.dishes %}
                                 <li>{{ dish.name }}</li>
                             {% endfor %}
                         </ul>
+                    </div>
                     {% endfor %}
                 {% endfor %}
             </div>
+        </div>
         {% endfor %}
     </section>
 </main>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Sélectionne tous les boutons de menu et leurs sections associées
-        const toggleButtons = document.querySelectorAll('.Menu');
+        // Sélectionne tous les boutons "Menu du ..."
+        const toggleButtons = document.querySelectorAll('.toggle-menu-btn');
 
         toggleButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Trouve la section associée à ce bouton
+                // Trouve la section "menu-sections" associée à ce bouton
                 const menuSections = button.closest('.menu-container').querySelector('.menu-sections');
                 // Bascule l'affichage de la section
                 menuSections.classList.toggle('hidden');
-                // Change le texte du bouton
-                button.innerHTML = menuSections.classList.contains('hidden') 
-                    ? `Menu du ${button.innerHTML.split(' ')[2]} &#9662;`
-                    : `Menu du ${button.innerHTML.split(' ')[2]} &#9652;`;
+                // Change le texte et la flèche du bouton
+                if (menuSections.classList.contains('hidden')) {
+                    button.innerHTML = `Menu du ${button.textContent.split(' ')[2]} &#9662;`; // Flèche vers le bas
+                } else {
+                    button.innerHTML = `Menu du ${button.textContent.split(' ')[2]} &#9652;`; // Flèche vers le haut
+                }
             });
         });
     });
 </script>
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
 
 {% endblock %}
