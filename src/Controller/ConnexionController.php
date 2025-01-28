@@ -8,27 +8,38 @@ class ConnexionController extends BaseController
 {
     private $userModel;
 
-    public function __construct($pdo){
+    public function __construct($pdo)
+    {
         $this->userModel = new User($pdo);
     }
 
-    public function index(){
-        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function index()
+    {
+
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $login = $_POST['login'];
             $mdp = $_POST['mdp'];
 
             $IdUser = $this->userModel->checkUser($login, $mdp);
 
-            if($IdUser){
+            if ($IdUser) {
                 session_start();
                 $_SESSION['isLogged'] = true;
                 $_SESSION['IdUser'] = $IdUser;
-                header('Location: index.php?page=accueil');
+
+                header('Location: ' . $_SESSION['referer']);
                 exit();
             } else {
                 $this->renderView('connexion.twig', ['erreur' => 'login ou mot de passe incorrect']);
             }
         } else {
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                $referer = $_SERVER['HTTP_REFERER'];
+                session_start();
+                $_SESSION['referer'] = $referer;
+            }
+
             $this->renderView('connexion.twig');
         }
     }
@@ -47,7 +58,7 @@ class ConnexionController extends BaseController
             $_SESSION['isLogged'] = true;
             $_SESSION['IdUser'] = $IdUser;
 
-            header('Location: index.php?page=accueil');
+            header('Location: ' . $_SESSION['referer']);
         } else {
             $this->renderView('inscription.twig');
         }

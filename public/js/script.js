@@ -74,6 +74,12 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("review-form")?.addEventListener("submit", function (event) {
         const form = event.target;
 
+        if (form.elements['IdUser'].value === "") {
+            event.preventDefault();
+            updateUrlParam({page: 'connexion'})
+            return;
+        }
+
         const url = new URL(window.location.href);
         console.log(url.searchParams);
         form.action = '?page=' + url.searchParams.get('page') + '&action=ajouter' + '&id=' + url.searchParams.get('id');
