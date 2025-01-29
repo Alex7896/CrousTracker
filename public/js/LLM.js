@@ -10,7 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+/**
+ * Fonction pour appeler l'API Groq du modèle Llama-3 et générer un résumé des avis de restaurant.
+ * @param {string} input - Texte à analyser et résumer.
+ */
 function callLLM(input) {
+    // Clé API pour accéder au service d'IA
     const apiKey = "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"
 
     // TODO faire des fonctions callLLM différentes suivant la configuration de l'IA qu'on veut (ex: Résumé avis ou ChatBot)
@@ -52,12 +57,14 @@ function callLLM(input) {
         })
             .then(response => response.json())
             .then(result => {
+                // Insérer la réponse de l'IA dans le champ de sortie
                 document.getElementById("output").value = begin + result.choices[0]?.message?.content;
             })
             .catch(error => {
                 console.error("Error:", error);
             });
     } else {
+        // Afficher un message si aucun avis n'est fourni
         document.getElementById("output").value = "Aucun avis disponible."
     }
 }

@@ -1,10 +1,11 @@
 <?php
+
 use App\Controller;
 
 // Récupérer les paramètres de l'URL
 $page = $_GET['page'] ?? null; // Page active
-$action = $_GET['action'] ?? null;
-$id = $_GET['id'] ?? null;
+$action = $_GET['action'] ?? null; // Action souhaitée
+$id = $_GET['id'] ?? null; // Id du restaurant
 
 // Initialisation du contrôleur
 $controller = null;
@@ -57,15 +58,11 @@ switch ($page) {
         break;
 }
 // Vérifier si le contrôleur et la méthode sont définis et appelés
-if ($controller && $method) {
-    require_once '../config/database.php'; // Connexion à la base de données
-    $controllerClass = 'App\\Controller\\' . $controller;
-    $controllerObject = new $controllerClass($pdo);
-    if(isset($id)) {
-        $controllerObject->$method($id);
-    } else {
-        $controllerObject->$method();
-    }
+require_once '../config/database.php'; // Connexion à la base de données
+$controllerClass = 'App\\Controller\\' . $controller;
+$controllerObject = new $controllerClass($pdo);
+if (isset($id)) {
+    $controllerObject->$method($id);
 } else {
-    echo "404 Not Found";
+    $controllerObject->$method();
 }
