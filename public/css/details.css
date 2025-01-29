@@ -6,7 +6,7 @@
 
 /* Header section */
 .restaurant-info-container > h1 {
-    display: none; /* Hides the title outside the header */
+    display: none;
 }
 
 .restaurant-photo {
@@ -28,7 +28,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Adds a dark overlay to improve text contrast */
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .restaurant-photo h1 {
@@ -57,7 +57,7 @@
 }
 
 .restaurant-details strong {
-    color: #c0392b; /* Red for titles */
+    color: #c0392b;
 }
 
 .restaurant-details ul {

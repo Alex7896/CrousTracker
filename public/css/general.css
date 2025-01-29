@@ -46,11 +46,11 @@ hr {
 
 .classement-container {
     overflow-y: auto;
-    width: 100%; /* Prend toute la largeur disponible */
+    width: 100%;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 20px;
-    margin: 0; /* Supprime le centrage */
+    margin: 0;
     text-align: center;
     font-family: Arial, sans-serif;
 }
@@ -63,7 +63,7 @@ hr {
 }
 
 .classement-table {
-    width: 100%; /* Le tableau occupe toute la largeur disponible */
+    width: 100%;
     margin: 0;
     border-collapse: collapse;
     margin-top: 20px;
@@ -76,7 +76,7 @@ hr {
 .classement-table th, .classement-table td {
     border: 1px solid #ddd;
     padding: 12px;
-    text-align: center; /* Centre le contenu des colonnes */
+    text-align: center;
 }
 
 .classement-table th {
@@ -107,9 +107,9 @@ hr {
 }
 
 .action-btn:hover {
-    background-color: #ff5722; /* Couleur vive au survol */
-    color: #fff; /* Contraste avec la couleur de fond */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Animation fluide */
+    background-color: #ff5722;
+    color: #fff;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Styles pour les étoiles */
@@ -117,7 +117,7 @@ hr {
     --percent: calc(var(--rating) / 5 * 100%);
     display: inline-block;
     font-size: 30px;
-    font-family: Times; /* Assure que les étoiles s'affichent correctement */
+    font-family: Times;
     line-height: 1;
 }
 
@@ -129,11 +129,6 @@ hr {
     -webkit-text-fill-color: transparent;
 }
 
-
-
-
-
-/*le caca de quentin*/
 .restaurant-section {
     height: 100%;
     max-height: 100%;
