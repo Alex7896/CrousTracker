@@ -45,7 +45,8 @@ hr {
 
 
 .classement-container {
-    max-width: 100%; /* Prend toute la largeur disponible */
+    overflow-y: auto;
+    width: 100%; /* Prend toute la largeur disponible */
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 20px;
