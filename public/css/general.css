@@ -32,6 +32,11 @@ section {
     padding-bottom: 10px;
 }
 
+.erreur-login {
+    color: #850000;
+    padding: 10px;
+}
+
 hr {
     margin-bottom: 15px;
     margin-top: 15px;

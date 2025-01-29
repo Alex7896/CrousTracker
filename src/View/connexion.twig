@@ -12,7 +12,7 @@
             </form>
             <button onclick="updateUrlParam({page:'connexion', action:'inscription'})">S'inscire</button>
             {% if erreur is not null %}
-                <div>{{ erreur }}</div>
+                <div class="erreur-login">{{ erreur }}</div>
             {% endif %}
         </div>
         {% else %}

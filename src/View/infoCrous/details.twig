@@ -7,22 +7,22 @@
         <section class="restaurant-info-container">
             <div class="restaurant-photo"
                  style="background-image: url('{{ restaurant.photo.src ?: "icons/OIG2.jpg" }}');">
-                <h1>{{ restaurant.title }}</h1>
+                <h1>{{ restaurant.title|replace({'<br/>': '', '<br>': ''})  }}</h1>
             </div>
 
             <div class="restaurant-details">
-                <p><strong>Type :</strong> {{ restaurant.type }}</p>
-                <p><strong>Localisation :</strong> {{ restaurant.area }}</p>
-                <p><strong>Adresse :</strong> {{ restaurant.address }}</p>
+                <p><strong>Type :</strong> {{ restaurant.type|replace({'<br/>': '', '<br>': ''}) }}</p>
+                <p><strong>Localisation :</strong> {{ restaurant.area|replace({'<br/>': '', '<br>': ''}) }}</p>
+                <p><strong>Adresse :</strong> {{ restaurant.address|replace({'<br/>': '', '<br>': ''}) }}</p>
 
-                <p><strong>Accessibilité :</strong> {% if restaurant.accessibility %} Oui {% else %} Non {% endif %}</p>
+                <p><strong>Accès Handicap:</strong> {% if restaurant.accessibility %} Oui {% else %} Non {% endif %}</p>
                 <p><strong>WiFi :</strong> {% if restaurant.wifi %} Disponible {% else %} Non disponible {% endif %}</p>
 
                 <h3>Description</h3>
-                <p>{{ restaurant.description }}</p>
+                <p>{{ restaurant.description|replace({'<br/>': '', '<br>': ''}) }}</p>
 
                 <h3>Accès</h3>
-                <p>{{ restaurant.access }}</p>
+                <p>{{ restaurant.access|replace({'<br/>': '', '<br>': ''}) }}</p>
 
                 <h3>Horaires d'ouverture</h3>
                 <p>{{ restaurant.operationalhours|replace({'<br/>': '', '<br>': ''}) }}</p>
@@ -30,7 +30,7 @@
                 <h3>Contact</h3>
                 <p><strong>Téléphone :</strong>
                     {% if restaurant.contact.phone %}
-                        {{ restaurant.contact.phone }}
+                        {{ restaurant.contact.phone|replace({'<br/>': '', '<br>': ''})  }}
                     {% else %}
                         Aucun numéro disponible
                     {% endif %}
@@ -38,7 +38,7 @@
 
                 <p><strong>Email :</strong>
                     {% if restaurant.contact.email %}
-                        <a href="mailto:{{ restaurant.contact.email }}">{{ restaurant.contact.email }}</a>
+                        <a href="mailto:{{ restaurant.contact.email }}">{{ restaurant.contact.email |replace({'<br/>': '', '<br>': ''}) }}</a>
                     {% else %}
                         Aucun email disponible
                     {% endif %}
