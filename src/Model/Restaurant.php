@@ -4,19 +4,21 @@ namespace App\Model;
 
 class Restaurant
 {
-// utilisé par classement et la map
-// fonction pour récuperer le nom, la note globale, la latitude et la longitude d'un resto
-// fonction pour fetch "certaines" données d'un resto crous en utilsant l'api crous
+    // Utilisé pour le classement et la carte
+    // Contient des fonctions pour récupérer des informations sur les restaurants Crous
     private $pdo;
 
+    // Constructeur : Initialise la connexion à la base de données via PDO
     public function __construct($pdo)
     {
         $this->pdo = $pdo;
     }
 
+    // Recharge la base de données avec les données des restaurants Crous depuis l'API
     function reload()
     {
         $urls = [
+            // Liste des URL des flux JSON des différents Crous
             "http://webservices-v2.crous-mobile.fr/feed/aix.marseille/externe/crous-aix.marseille.min.json",
             "http://webservices-v2.crous-mobile.fr/feed/amiens/externe/crous-amiens.min.json",
             "http://webservices-v2.crous-mobile.fr/feed/antilles.guyane/externe/crous-antilles.guyane.min.json",
@@ -45,26 +47,33 @@ class Restaurant
             "http://webservices-v2.crous-mobile.fr/feed/versailles/externe/crous-versailles.min.json"
         ];
 
-        $stmt = $this->pdo->prepare("INSERT INTO restaurant(idRestaurant, type, nom, adresse, latitude, longitude, urlApi) VALUES (?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE type = ?, nom = ?, adresse = ?, latitude = ?, longitude = ?, urlApi = ?");
+        $stmt = $this->pdo->prepare("INSERT INTO restaurant(idRestaurant, type, nom, adresse, latitude, longitude, urlApi) 
+            VALUES (?, ?, ?, ?, ?, ?, ?) 
+            ON DUPLICATE KEY UPDATE type = ?, nom = ?, adresse = ?, latitude = ?, longitude = ?, urlApi = ?");
+
         foreach ($urls as $url) {
             $response = file_get_contents($url);
             $response = preg_replace('/[\x00-\x1F\x7F]/', '', $response);
+
             if ($response !== false) {
                 $jsonData = json_decode($response);
 
                 foreach ($jsonData->restaurants as $json) {
-                    $stmt->execute([$json->id, $json->type, $json->title, $json->adresse, $json->lat, $json->lon, $url, $json->type, $json->title, $json->adresse, $json->lat, $json->lon, $url]);
+                    $stmt->execute([$json->id, $json->type, $json->title, $json->adresse, $json->lat, $json->lon, $url,
+                        $json->type, $json->title, $json->adresse, $json->lat, $json->lon, $url]);
                 }
             }
         }
     }
 
+    // Récupère la liste des restaurants triés par moyenne des avis
     function getRestaurants() {
         $stmt = $this->pdo->prepare("SELECT * FROM restaurant ORDER BY moyenneAvis DESC");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
+    // Récupère le menu d'un restaurant en utilisant l'API du Crous
     function getMenu($id) {
         $stmt = $this->pdo->prepare("SELECT urlApi FROM restaurant WHERE idRestaurant = ?");
         $stmt->execute([$id]);
@@ -85,6 +94,7 @@ class Restaurant
         return [];
     }
 
+    // Récupère les détails d'un restaurant (nom, adresse, horaires, accessibilité, contact, etc.)
     function getRestaurantDetails($id) {
         $stmt = $this->pdo->prepare("SELECT urlApi FROM restaurant WHERE idRestaurant = ?");
         $stmt->execute([$id]);
@@ -109,15 +119,15 @@ class Restaurant
                         'access' => $restaurant->access,
                         'operationalhours' => $restaurant->operationalhours,
                         'contact' => [
-                            'phone' => $restaurant->contact->tel, // Téléphone
-                            'email' => $restaurant->contact->email // Email
+                            'phone' => $restaurant->contact->tel,
+                            'email' => $restaurant->contact->email
                         ],
                         'payment' => array_map(function($payment) {
-                            return $payment->name; // Liste des moyens de paiement
+                            return $payment->name;
                         }, $restaurant->payment),
                         'photo' => [
-                            'src' => $restaurant->photo->src, // Lien vers la photo
-                            'alt' => $restaurant->photo->alt  // Texte alternatif de la photo
+                            'src' => $restaurant->photo->src,
+                            'alt' => $restaurant->photo->alt
                         ]
                     ];
                 }
@@ -126,6 +136,7 @@ class Restaurant
         return [];
     }
 
+    // Récupère la moyenne des avis d'un restaurant
     function getMoyenneAvis($id)
     {
         $stmt = $this->pdo->prepare("SELECT moyenneAvis FROM restaurant WHERE IdRestaurant = ?");

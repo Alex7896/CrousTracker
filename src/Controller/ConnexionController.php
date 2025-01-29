@@ -4,19 +4,39 @@ namespace App\Controller;
 
 use App\Model\User;
 
+/**
+ * Classe ConnexionController
+ *
+ * Cette classe gère l'authentification des utilisateurs, y compris la connexion, l'inscription et la déconnexion.
+ * Elle interagit avec le modèle User pour vérifier et enregistrer les utilisateurs en base de données.
+ */
 class ConnexionController extends BaseController
 {
     private $userModel;
 
+    /**
+     * Constructeur
+     *
+     * Initialise le contrôleur avec une instance du modèle User.
+     *
+     * @param \PDO $pdo Connexion à la base de données.
+     */
     public function __construct($pdo)
     {
         $this->userModel = new User($pdo);
     }
 
+    /**
+     * Gère la connexion des utilisateurs.
+     *
+     * - Vérifie si un formulaire POST a été soumis.
+     * - Valide les informations d'identification.
+     * - Démarre une session et stocke l'ID utilisateur si la connexion est réussie.
+     * - Redirige l'utilisateur vers la page précédente après connexion.
+     * - Affiche un message d'erreur en cas d'échec.
+     */
     public function index()
     {
-
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $login = $_POST['login'];
             $mdp = $_POST['mdp'];
@@ -31,7 +51,7 @@ class ConnexionController extends BaseController
                 header('Location: ' . $_SESSION['referer']);
                 exit();
             } else {
-                $this->renderView('connexion.twig', ['erreur' => 'login ou mot de passe incorrect']);
+                $this->renderView('connexion.twig', ['erreur' => 'Login ou mot de passe incorrect']);
             }
         } else {
             if (isset($_SERVER['HTTP_REFERER'])) {
@@ -44,6 +64,14 @@ class ConnexionController extends BaseController
         }
     }
 
+    /**
+     * Gère l'inscription des nouveaux utilisateurs.
+     *
+     * - Vérifie si un formulaire POST a été soumis.
+     * - Ajoute l'utilisateur en base de données.
+     * - Démarre une session et connecte l'utilisateur après l'inscription.
+     * - Redirige l'utilisateur vers la page précédente.
+     */
     public function inscription()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -64,6 +92,12 @@ class ConnexionController extends BaseController
         }
     }
 
+    /**
+     * Gère la déconnexion des utilisateurs.
+     *
+     * - Supprime les informations de session de l'utilisateur.
+     * - Redirige vers la page de connexion.
+     */
     public function deconnexion()
     {
         session_start();
