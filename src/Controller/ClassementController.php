@@ -11,6 +11,7 @@ class ClassementController extends BaseController
         $this->restaurantModel = new Restaurant($pdo);
     }
     public function index() {
+        // le render de la page de classement
         $this->renderView('classement.twig',['restaurants'=>$this->restaurantModel->getRestaurants()]);
     }
 }

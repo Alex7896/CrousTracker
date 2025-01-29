@@ -4,8 +4,10 @@ namespace App\Controller;
 
 class BaseController
 {
+
     protected function renderView($view, $data = [])
     {
+        // Fonction pour commune pour rendre une vue avec les données associées
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
