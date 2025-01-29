@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const inputField = document.getElementById('input');
 
     // Ajouter un événement pour détecter la touche "Entrée"
-    inputField?.addEventListener('keypress', function(event) {
+    inputField?.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             event.preventDefault();  // Empêche l'action par défaut de la touche "Entrée"
             callLLM();  // Appelle la fonction callLLM
@@ -10,21 +10,38 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function callLLM() {
+function callLLM(input) {
     const apiKey = "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"
 
-    let input = document.getElementById("input").value;
+    if (!input) {
+        input = document.getElementById("input").value;
+    } else if (input.length === 0) {
+        console.log("test")
+    }
 
     let url = "https://api.groq.com/openai/v1/chat/completions";
 
+    const begin = "Voici un résumé des avis de restaurant :";
+
     const data = {
-        messages: [
+        "messages": [
             {
-                role: "user",
-                content: `${input}`,
+                "role": "system",
+                "content": "Tu es un assistant qui résume les avis de restaurant avec un texte court",
+            },
+            {
+                "role": "user",
+                "content": `${JSON.stringify(input)}`,
+            },
+            {
+                "role": "assistant",
+                "content": `${begin}`
             }
         ],
-        model: "llama-3.1-8b-instant"
+        "temperature": 0.5,
+        "max_completion_tokens": 300,
+        "model": "llama-3.3-70b-versatile",
+        "stop": ""
     };
 
     fetch(url, {
@@ -37,9 +54,11 @@ function callLLM() {
     })
         .then(response => response.json())
         .then(result => {
-            document.getElementById("output").value = result.choices[0].message.content;
+            document.getElementById("output").value = begin + result.choices[0]?.message?.content;
         })
         .catch(error => {
             console.error("Error:", error);
         });
 }
+
+

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Model\Restaurant;
 
-class ActualiserController
+class ActualiserController extends BaseController
 {
     private $restaurantModel;
 
@@ -14,7 +14,8 @@ class ActualiserController
 
     public function index()
     {
-        $this->restaurantModel->reload();
-        header('Location: index.php');
+        $this->renderView('LLMtest.twig');
+        //$this->restaurantModel->reload();
+        //header('Location: index.php');
     }
 }

@@ -71,6 +71,35 @@ function toggleReviewForm() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.Star');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            selectedRating = star.getAttribute('data-value');
+            updateStars(selectedRating);
+        });
+
+        star.addEventListener('mouseover', () => {
+            updateStars(star.getAttribute('data-value'));
+        });
+
+        star.addEventListener('mouseout', () => {
+            updateStars(selectedRating);
+        });
+    });
+
+    function updateStars(rating) {
+        stars.forEach(star => {
+            if (star.getAttribute('data-value') <= rating) {
+                star.classList.add('Selected');
+            } else {
+                star.classList.remove('Selected');
+            }
+        });
+    }
+
+
     document.getElementById("review-form")?.addEventListener("submit", function (event) {
         const form = event.target;
 
@@ -79,10 +108,10 @@ window.addEventListener('DOMContentLoaded', () => {
             updateUrlParam({page: 'connexion'})
             return;
         }
+        form.elements['note'].value = selectedRating;
 
         const url = new URL(window.location.href);
         console.log(url.searchParams);
         form.action = '?page=' + url.searchParams.get('page') + '&action=ajouter' + '&id=' + url.searchParams.get('id');
-
     });
 })

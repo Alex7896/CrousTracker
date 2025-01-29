@@ -123,8 +123,6 @@ class Restaurant
                 }
             }
         }
-
-
         return [];
     }
 
@@ -134,5 +132,4 @@ class Restaurant
         $stmt->execute([$id]);
         return $stmt->fetch()['moyenneAvis'];
     }
-
 }

@@ -46,7 +46,7 @@ BEGIN
     DECLARE new_moyenne DECIMAL(3, 2);
 
     -- Calcul de la nouvelle moyenne des avis pour le restaurant concerné
-    SELECT AVG(Note) INTO new_moyenne
+    SELECT AVG(note) INTO new_moyenne
     FROM avis
     WHERE IdRestaurant = NEW.IdRestaurant;
 

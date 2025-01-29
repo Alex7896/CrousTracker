@@ -1,0 +1,13 @@
+{% extends "includes/base.twig" %}
+{% block corps %}
+<div class="main">
+    <section class="center">
+        <!-- ceci est temporaire -->
+        <div class="llm-container">
+            <input type="text" name="input" id="input" placeholder="Parle avec une IA">
+            <button id="submit" onclick="callLLM()">Soumettre</button>
+            <textarea id="output" readonly></textarea>
+        </div>
+    </section>
+</div>
+{% endblock %}

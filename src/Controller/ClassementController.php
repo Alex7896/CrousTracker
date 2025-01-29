@@ -13,6 +13,4 @@ class ClassementController extends BaseController
     public function index() {
         $this->renderView('classement.twig',['restaurants'=>$this->restaurantModel->getRestaurants()]);
     }
-
-
 }

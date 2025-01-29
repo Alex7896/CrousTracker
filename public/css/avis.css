@@ -1,9 +1,16 @@
 /* Conteneur des avis */
+.main-reviews-container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px auto;
+}
+
+
 .reviews-container {
     padding: 20px;
-    min-width: 60px;
-    padding-inline: 20%;
-    margin: 20px auto;
+    min-width: 250px;
+    margin-inline: 200px;
+    flex-grow: 1;
 }
 
 .reviews-list {
@@ -146,11 +153,11 @@
 }
 
 .submit-button {
-    margin-left: 40%;
-    margin-right: 40%;
-    margin-bottom: 20px;
+    display: block;
+    margin: 0 auto 20px;
     background-color: #28a745;
     color: white;
+    min-width: 120px;
     width: 20%;
     padding: 10px 20px;
     border: none;
@@ -161,4 +168,22 @@
 
 .submit-button:hover {
     background-color: #218838;
+}
+
+.Rating {
+    display: inline-block;
+    font-size: 30px;
+    font-family: Times;
+    line-height: 1;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.Star {
+    color: #ddd; /* Couleur des étoiles non sélectionnées */
+    transition: color 0.3s;
+}
+
+.Star.Selected {
+    color: #ffcc0f; /* Couleur des étoiles sélectionnées */
 }

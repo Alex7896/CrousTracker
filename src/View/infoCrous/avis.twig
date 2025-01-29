@@ -2,60 +2,68 @@
 {% block corps %}
     <div class="main">
         {% include "infoCrous/nav.twig" %}
-        <section class="reviews-container">
-            <!-- Bouton pour ajouter un nouvel avis -->
-            <div class="add-review-button-container">
-                <button class="add-review-button" onclick="toggleReviewForm()">
-                    <svg class="add-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                                d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z">
-                        </path>
-                    </svg>
-                    <span>Rédiger un avis</span>
-                </button>
-            </div>
-            <!-- Formulaire d'ajout d'avis -->
-            <div id="review-form-container" class="review-form-container">
-                <form id="review-form" method="POST" action="">
-                    <h3>Ajouter un avis</h3>
-                    <input type="hidden" id="review-id" name="IdUser" value="{{ IdUser }}">
-                    <label for="note">Note :</label>
-                    <select id="note" name="note" required>
-                        <option value="" disabled selected>Choisissez une note</option>
-                        <option value="1">1 - Très mauvais</option>
-                        <option value="2">2 - Mauvais</option>
-                        <option value="3">3 - Moyen</option>
-                        <option value="4">4 - Bon</option>
-                        <option value="5">5 - Excellent</option>
-                    </select>
-
-                    <label for="comment">Commentaire :</label>
-                    <textarea id="comment" name="comment" rows="4" placeholder="Écrivez votre avis ici..."
-                              required></textarea>
-
-                    <button type="submit" class="submit-button">Envoyer</button>
-                </form>
-            </div>
-
-            <hr>
-            <span><strong>Moyenne des avis :</strong></span>
-            <div class="Stars" style="--rating: {{ moyenneAvis }}" title="Note : {{ moyenneAvis }} sur 5"></div>
-            <hr>
-            <div class="reviews-list">
-                <!-- Liste des Avis -->
-                {% for a in avis %}
-                    <div class="review-card">
-                        <div class="review-header">
-                            <h2 class="user-name">{{ a.prenom }} {{ a.nom }}</h2>
-                            <div class="star-rating">
-                                <div class="Stars" style="--rating: {{ a.Note }}"
-                                     title="Note : {{ a.Note }} sur 5"></div>
-                            </div>
+        <section class="main-reviews-container">
+            <div class="reviews-container">
+                <!-- Bouton pour ajouter un nouvel avis -->
+                <div class="add-review-button-container">
+                    <button class="add-review-button" onclick="toggleReviewForm()">
+                        <svg class="add-icon" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                    d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z">
+                            </path>
+                        </svg>
+                        <span>Rédiger un avis</span>
+                    </button>
+                </div>
+                <!-- Formulaire d'ajout d'avis -->
+                <div id="review-form-container" class="review-form-container">
+                    <form id="review-form" method="POST" action="">
+                        <h3>Ajouter un avis</h3>
+                        <input type="hidden" id="review-id" name="IdUser" value="{{ IdUser }}">
+                        <label for="note">Note :</label>
+                        <input type="hidden" id="note" name="note">
+                        <div class="Rating">
+                            <span class="Star" data-value="1">★</span>
+                            <span class="Star" data-value="2">★</span>
+                            <span class="Star" data-value="3">★</span>
+                            <span class="Star" data-value="4">★</span>
+                            <span class="Star" data-value="5">★</span>
                         </div>
-                        <p class="review-text">{{ a.Commentaire }}</p>
-                        <span class="review-date">Publié le {{ a.date_publication|date('d M Y') }}</span>
-                    </div>
-                {% endfor %}
+                        <label for="comment">Commentaire :</label>
+                        <textarea id="comment" name="comment" rows="4" placeholder="Écrivez votre avis ici..."
+                                  required></textarea>
+
+                        <button type="submit" class="submit-button">Envoyer</button>
+                    </form>
+                </div>
+
+                <hr>
+                <span><strong>Moyenne des avis : </strong></span>
+                <div class="Stars" style="--rating: {{ moyenneAvis }}" title="Note : {{ moyenneAvis }} sur 5"></div>
+                <hr>
+                <div class="reviews-list">
+                    <!-- Liste des Avis -->
+                    {% for a in avis %}
+                        <div class="review-card">
+                            <div class="review-header">
+                                <h2 class="user-name">{{ a.prenom }} {{ a.nom }}</h2>
+                                <div class="star-rating">
+                                    <div class="Stars" style="--rating: {{ a.note }}"
+                                         title="Note : {{ a.note }} sur 5"></div>
+                                </div>
+                            </div>
+                            <p class="review-text">{{ a.commentaire }}</p>
+                            <span class="review-date">Publié le {{ a.date_publication|date('d M Y') }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="llm-container">
+                <h2>Résumé par IA</h2>
+                <textarea id="output" readonly></textarea>
+                <script>
+                    callLLM({{ avis|map(a => {'commentaire': a.commentaire})|json_encode|raw }});
+                </script>
             </div>
         </section>
     </div>
