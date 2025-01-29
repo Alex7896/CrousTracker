@@ -19,7 +19,7 @@ class Avis
 
     public function ajouterAvis($IdUser, $note, $comment, $id) {
         $stmt = $this->pdo->prepare("
-        INSERT INTO avis (IdUser, Note, Commentaire, IdRestaurant, date_publication) 
+        INSERT INTO avis (IdUser, note, commentaire, IdRestaurant, date_publication) 
         VALUES (?, ?, ?, ?, NOW())");
         $stmt->execute([$IdUser, $note, $comment, $id]);
     }
