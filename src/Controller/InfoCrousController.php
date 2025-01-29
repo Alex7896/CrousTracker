@@ -17,15 +17,15 @@ class InfoCrousController extends BaseController
         $this->avisModel = new Avis($pdo);
     }
 
+    // Fonction qui affiche la page des détails
     public function afficherDetails($id)
     {
-        //fait un rendu de la page détails
         $this->renderView('infoCrous/details.twig', ['restaurant' => $this->restaurantModel->getRestaurantDetails($id)]);
     }
 
+    // Fonction permettant d'ajouter un avis
     public function ajouterAvis($id)
     {
-        //récupération des avis
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $IdUser = $_POST['IdUser'];
             $note = $_POST['note'];
@@ -37,17 +37,16 @@ class InfoCrousController extends BaseController
         header('Location: index.php?page=avis&id=' . $id);
     }
 
-
+    // Fonction qui affiche la page des menus
     public function afficherMenu($id)
     {
-        //affiche les menus
         $menu = $this->restaurantModel->getMenu($id);
         $this->renderView('infoCrous/menu.twig', ['menu' => $menu]);
     }
 
+    // Fonction qui affiche la page des avis
     public function afficherAvis($id)
     {
-        // afiiche les avis du ru
         $avis = $this->avisModel->getAvis($id);
 
         $moyenneAvis = $this->restaurantModel->getMoyenneAvis($id);

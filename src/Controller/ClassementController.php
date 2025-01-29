@@ -10,8 +10,9 @@ class ClassementController extends BaseController
     public function __construct($pdo){
         $this->restaurantModel = new Restaurant($pdo);
     }
+
+    // Fonction qui affiche la page classement
     public function index() {
-        // le render de la page de classement
         $this->renderView('classement.twig',['restaurants'=>$this->restaurantModel->getRestaurants()]);
     }
 }

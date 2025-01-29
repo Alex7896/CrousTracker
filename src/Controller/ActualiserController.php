@@ -12,9 +12,9 @@ class ActualiserController extends BaseController
         $this->restaurantModel = new Restaurant($pdo);
     }
 
+    // Fonction qui actualise les restaurants dans la BDD
     public function index()
     {
-        //affichage de la page restaurants
         $this->restaurantModel->reload();
         header('Location: index.php');
     }
