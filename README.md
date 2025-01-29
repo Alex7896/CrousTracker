@@ -1,7 +1,19 @@
 # CrousTracker
 
+### Fonctionnalités
+***
+
+
+
+### Utilisation 
+***
+
+1. 
+
+
 ### Organisation de l'archive
 ***
+
 * [`config`](https://github.com/Alex7896/WordFinder/tree/main/config) : Contient les fichiers de configuration du site
   * [`database.php`](https://github.com/Alex7896/WordFinder/blob/main/config/database.php) : Connexion à la BDD
   * [`routes.php`](https://github.com/Alex7896/WordFinder/blob/main/config/routes.php) : Routage vers les différentes pages
