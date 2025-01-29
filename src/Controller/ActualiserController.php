@@ -14,6 +14,7 @@ class ActualiserController extends BaseController
 
     public function index()
     {
+        //affichage de la page restaurants
         $this->restaurantModel->reload();
         header('Location: index.php');
     }

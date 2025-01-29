@@ -11,6 +11,8 @@ class AccueilMapController extends BaseController
         $this->restaurantModel = new Restaurant($pdo);
     }
     public function index() {
+        //affichage de la page d'accueil
+
         $this->renderView('accueilMap.twig', ['restaurants' => $this->restaurantModel->getRestaurants()]);
     }
 }
