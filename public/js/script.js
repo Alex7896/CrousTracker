@@ -108,10 +108,15 @@ window.addEventListener('DOMContentLoaded', () => {
             updateUrlParam({page: 'connexion'})
             return;
         }
-        form.elements['note'].value = selectedRating;
 
-        const url = new URL(window.location.href);
-        console.log(url.searchParams);
-        form.action = '?page=' + url.searchParams.get('page') + '&action=ajouter' + '&id=' + url.searchParams.get('id');
+        if (selectedRating === 0) {
+            event.preventDefault();
+            alert('Veuillez entrer une note !')
+        } else {
+            form.elements['note'].value = selectedRating;
+
+            const url = new URL(window.location.href);
+            form.action = '?page=' + url.searchParams.get('page') + '&action=ajouter' + '&id=' + url.searchParams.get('id');
+        }
     });
 })
