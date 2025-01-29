@@ -12,7 +12,17 @@
 ### Utilisation 
 ***
 
-1. 
+Avant de commencer, assurez-vous d'avoir installé **XAMPP** (incluant Apache et MySQL)
+
+1. Cloner le dépôt Git : Clonez le projet depuis le dépôt Git et placez-le dans le dossier `C:\xampp\htdocs`.
+2. Démarrer XAMPP.
+3. Dans le **panneau de contrôle XAMPP**, démarrez :
+   - **Apache** (serveur web)
+   - **MySQL** (base de données)
+4. Configuration de la base de données :
+   - Allez sur [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
+   - Importez le script `createDB.sql`
+5. La configuration est terminée. 🎉 Vous pouvez maintenant utiliser le site web depuis votre navigateur.
 
 
 ### Organisation de l'archive
