@@ -13,52 +13,53 @@ document.addEventListener('DOMContentLoaded', function () {
 function callLLM(input) {
     const apiKey = "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"
 
+    // TODO faire des fonctions callLLM différentes suivant la configuration de l'IA qu'on veut (ex: Résumé avis ou ChatBot)
     if (!input) {
-        input = document.getElementById("input").value;
-    } else if (input.length === 0) {
-        console.log("test")
-    }
+        input = document.getElementById("input").value; // a enlever surement
+    } else if (input.length !== 0) {
+        let url = "https://api.groq.com/openai/v1/chat/completions";
 
-    let url = "https://api.groq.com/openai/v1/chat/completions";
+        const begin = "Voici un résumé des avis de restaurant :";
 
-    const begin = "Voici un résumé des avis de restaurant :";
+        const data = {
+            "messages": [
+                {
+                    "role": "system",
+                    "content": "Tu es un assistant qui résume les avis de restaurant avec un texte court",
+                },
+                {
+                    "role": "user",
+                    "content": `${JSON.stringify(input)}`,
+                },
+                {
+                    "role": "assistant",
+                    "content": `${begin}`
+                }
+            ],
+            "temperature": 0.5,
+            "max_completion_tokens": 300,
+            "model": "llama-3.3-70b-versatile",
+            "stop": ""
+        };
 
-    const data = {
-        "messages": [
-            {
-                "role": "system",
-                "content": "Tu es un assistant qui résume les avis de restaurant avec un texte court",
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${apiKey}`,
+                "Content-Type": "application/json"
             },
-            {
-                "role": "user",
-                "content": `${JSON.stringify(input)}`,
-            },
-            {
-                "role": "assistant",
-                "content": `${begin}`
-            }
-        ],
-        "temperature": 0.5,
-        "max_completion_tokens": 300,
-        "model": "llama-3.3-70b-versatile",
-        "stop": ""
-    };
-
-    fetch(url, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${apiKey}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => response.json())
-        .then(result => {
-            document.getElementById("output").value = begin + result.choices[0]?.message?.content;
+            body: JSON.stringify(data)
         })
-        .catch(error => {
-            console.error("Error:", error);
-        });
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById("output").value = begin + result.choices[0]?.message?.content;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+    } else {
+        document.getElementById("output").value = "Aucun avis disponible."
+    }
 }
 
 

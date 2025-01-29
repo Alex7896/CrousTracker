@@ -14,8 +14,7 @@ class ActualiserController extends BaseController
 
     public function index()
     {
-        $this->renderView('LLMtest.twig');
-        //$this->restaurantModel->reload();
-        //header('Location: index.php');
+        $this->restaurantModel->reload();
+        header('Location: index.php');
     }
 }

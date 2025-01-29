@@ -36,27 +36,32 @@
                         <button type="submit" class="submit-button">Envoyer</button>
                     </form>
                 </div>
-
                 <hr>
-                <span><strong>Moyenne des avis : </strong></span>
-                <div class="Stars" style="--rating: {{ moyenneAvis }}" title="Note : {{ moyenneAvis }} sur 5"></div>
-                <hr>
-                <div class="reviews-list">
-                    <!-- Liste des Avis -->
-                    {% for a in avis %}
-                        <div class="review-card">
-                            <div class="review-header">
-                                <h2 class="user-name">{{ a.prenom }} {{ a.nom }}</h2>
-                                <div class="star-rating">
-                                    <div class="Stars" style="--rating: {{ a.note }}"
-                                         title="Note : {{ a.note }} sur 5"></div>
+                {% if avis %}
+                    <span><strong>Moyenne des avis : </strong></span>
+                    <div class="Stars" style="--rating: {{ moyenneAvis }}" title="Note : {{ moyenneAvis }} sur 5"></div>
+                    <hr>
+                    <div class="reviews-list">
+                        <!-- Liste des Avis -->
+                        {% for a in avis %}
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <h2 class="user-name">{{ a.prenom }} {{ a.nom }}</h2>
+                                    <div class="star-rating">
+                                        <div class="Stars" style="--rating: {{ a.note }}"
+                                             title="Note : {{ a.note }} sur 5"></div>
+                                    </div>
                                 </div>
+                                <p class="review-text">{{ a.commentaire }}</p>
+                                <span class="review-date">Publié le {{ a.date_publication|date('d M Y') }}</span>
                             </div>
-                            <p class="review-text">{{ a.commentaire }}</p>
-                            <span class="review-date">Publié le {{ a.date_publication|date('d M Y') }}</span>
-                        </div>
-                    {% endfor %}
-                </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="reviews-list">
+                        <h1 style="margin:20px auto">Aucun avis disponible.</h1>
+                    </div>
+                {% endif %}
             </div>
             <div class="llm-container">
                 <h2>Résumé par IA</h2>

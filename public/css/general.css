@@ -158,6 +158,15 @@ hr {
     line-height: 1;
     user-select: none;
 }
+
+#menu-content {
+    min-width: 400px;
+    background-color: #f9f9f9;
+    margin: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 .nav-arrow:hover {
     border-color: red;
     color : white;
