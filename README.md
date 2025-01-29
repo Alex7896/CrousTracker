@@ -23,6 +23,7 @@ Avant de commencer, assurez-vous d'avoir installé **XAMPP** (incluant Apache et
    - Allez sur [http://localhost/phpmyadmin](http://localhost/phpmyadmin).
    - Importez le script `createDB.sql`
 5. La configuration est terminée. 🎉 Vous pouvez maintenant utiliser le site web depuis votre navigateur.
+6. Une fois sur le site web de CrousTracker, n'oubliez pas d'actualiser les données des restaurants avec le bouton actualiser.
 
 
 ### Organisation de l'archive
