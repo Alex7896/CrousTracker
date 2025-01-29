@@ -1,12 +1,22 @@
+/**
+ * Met à jour les paramètres de l'URL actuelle en fonction des valeurs passées en argument.
+ *
+ * @param {Object} params - Un objet contenant les paramètres à mettre à jour.
+ */
 function updateUrlParam({page, action, id}) {
+    // Crée un objet URL basé sur l'URL actuelle de la fenêtre
     let url = new URL(window.location.href);
 
+    // Stocke les valeurs actuelles des paramètres (s'ils existent)
     const currentParams = {};
     if (url.searchParams.has('page')) currentParams.page = url.searchParams.get('page');
     if (url.searchParams.has('action')) currentParams.action = url.searchParams.get('action');
     if (url.searchParams.has('id')) currentParams.id = url.searchParams.get('id');
 
+    // Réinitialise les paramètres de l'URL
     url.search = '';
+
+    // Mise à jour du paramètre "page"
     if (page !== undefined) {
         if (page === true) {
             if (currentParams.page) {
@@ -17,6 +27,7 @@ function updateUrlParam({page, action, id}) {
         }
     }
 
+    // Mise à jour du paramètre "action"
     if (action !== undefined) {
         if (action === true) {
             if (currentParams.action) {
@@ -27,6 +38,7 @@ function updateUrlParam({page, action, id}) {
         }
     }
 
+    // Mise à jour du paramètre "id"
     if (id !== undefined) {
         if (id === true) {
             if (currentParams.id) {
@@ -36,6 +48,8 @@ function updateUrlParam({page, action, id}) {
             url.searchParams.set('id', id);
         }
     }
+
+    // Redirige la page vers la nouvelle URL mise à jour
     window.location.href = url.toString();
 }
 

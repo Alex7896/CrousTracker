@@ -14,13 +14,6 @@ class ConnexionController extends BaseController
 {
     private $userModel;
 
-    /**
-     * Constructeur
-     *
-     * Initialise le contrôleur avec une instance du modèle User.
-     *
-     * @param \PDO $pdo Connexion à la base de données.
-     */
     public function __construct($pdo)
     {
         $this->userModel = new User($pdo);

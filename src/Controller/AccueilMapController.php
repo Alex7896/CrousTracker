@@ -10,6 +10,7 @@ class AccueilMapController extends BaseController
     public function __construct($pdo){
         $this->restaurantModel = new Restaurant($pdo);
     }
+
     public function index() {
         //affichage de la page d'accueil
 
