@@ -1,36 +1,40 @@
 {% extends "includes/base.twig" %}
 
 {% block corps %}
-    <div class="classement-container">
-        <h1>Classement des restaurants CROUS</h1>
-        <table class="classement-table">
-            <thead>
-            <tr>
-                <th>Nom du restaurant</th>
-                <th>Moyenne des avis</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for restaurant in restaurants %}
+    <div class="main">
+        <div class="classement-container">
+            <h1>Classement des restaurants CROUS</h1>
+            <table class="classement-table">
+                <thead>
                 <tr>
-                    <td>{{ restaurant.nom }}</td>
-                    <td>
-                        {% if restaurant.moyenneAvis is not null %}
-                        <!-- Affichage de la moyenne des avis avec des étoiles -->
-                            <div class="Stars" style="--rating: {{ restaurant.moyenneAvis }}" title="Note : {{ restaurant.moyenneAvis }} sur 5"></div>
-                        {% else %}
-                            <div>Pas de note</div>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <button onclick="updateUrlParam({page: 'details', id: '{{ restaurant.IdRestaurant }}'})" class="action-btn">
-                            <img src="icons/details-36-512.png" alt="Voir plus">
-                        </button>
-                    </td>
+                    <th>Nom du restaurant</th>
+                    <th>Moyenne des avis</th>
+                    <th>Action</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                {% for restaurant in restaurants %}
+                    <tr>
+                        <td>{{ restaurant.nom }}</td>
+                        <td>
+                            {% if restaurant.moyenneAvis is not null %}
+                                <!-- Affichage de la moyenne des avis avec des étoiles -->
+                                <div class="Stars" style="--rating: {{ restaurant.moyenneAvis }}"
+                                     title="Note : {{ restaurant.moyenneAvis }} sur 5"></div>
+                            {% else %}
+                                <div>Pas de note</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <button onclick="updateUrlParam({page: 'details', id: '{{ restaurant.IdRestaurant }}'})"
+                                    class="action-btn">
+                                <img src="icons/details-36-512.png" alt="Voir plus">
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}
