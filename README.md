@@ -1,8 +1,12 @@
 # CrousTracker
 
 ### Fonctionnalités
-***
-
+*** 
+* Localisation des restaurants et caféterias Crous en France  
+* Affichage du classement des Crous
+* Possibilité de se connecter à l'application afin de publier un avis
+* Affichage des détails des addresses Crous
+* Consultation du menu de la semaine
 
 
 ### Utilisation 
