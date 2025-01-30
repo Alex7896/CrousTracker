@@ -18,10 +18,7 @@ function callLLM(input) {
     // Clé API pour accéder au service d'IA
     const apiKey = "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"
 
-    // TODO faire des fonctions callLLM différentes suivant la configuration de l'IA qu'on veut (ex: Résumé avis ou ChatBot)
-    if (!input) {
-        input = document.getElementById("input").value; // a enlever surement
-    } else if (input.length !== 0) {
+    if (input.length !== 0) {
         let url = "https://api.groq.com/openai/v1/chat/completions";
 
         const begin = "Voici un résumé des avis de restaurant :";
