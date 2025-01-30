@@ -64,17 +64,30 @@ class Restaurant
                 }
             }
         }
+
+        // Calcule de moyenneAvis après création des restaurants si des avis existe déjà
+        $this->pdo->query("
+        UPDATE restaurant r
+        LEFT JOIN (
+            SELECT IdRestaurant, AVG(note) AS moyenne
+            FROM avis
+            GROUP BY IdRestaurant
+        ) a ON r.idRestaurant = a.IdRestaurant
+        SET r.moyenneAvis = a.moyenne
+    ");
     }
 
     // Récupère la liste des restaurants triés par moyenne des avis
-    function getRestaurants() {
+    function getRestaurants()
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM restaurant ORDER BY moyenneAvis DESC");
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
     // Récupère le menu d'un restaurant en utilisant l'API du Crous
-    function getMenu($id) {
+    function getMenu($id)
+    {
         $stmt = $this->pdo->prepare("SELECT urlApi FROM restaurant WHERE idRestaurant = ?");
         $stmt->execute([$id]);
         $url = $stmt->fetch()['urlApi'];
@@ -95,7 +108,8 @@ class Restaurant
     }
 
     // Récupère les détails d'un restaurant (nom, adresse, horaires, accessibilité, contact, etc.)
-    function getRestaurantDetails($id) {
+    function getRestaurantDetails($id)
+    {
         $stmt = $this->pdo->prepare("SELECT urlApi FROM restaurant WHERE idRestaurant = ?");
         $stmt->execute([$id]);
         $url = $stmt->fetch()['urlApi'];
@@ -122,7 +136,7 @@ class Restaurant
                             'phone' => $restaurant->contact->tel,
                             'email' => $restaurant->contact->email
                         ],
-                        'payment' => array_map(function($payment) {
+                        'payment' => array_map(function ($payment) {
                             return $payment->name;
                         }, $restaurant->payment),
                         'photo' => [
